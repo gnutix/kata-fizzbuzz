@@ -11,6 +11,6 @@ use FizzBuzz\RoundInterface;
  *
  * @method RoundInterface[] toArray()
  */
-class Rounds extends ArrayCollection
+final class Rounds extends ArrayCollection
 {
 }

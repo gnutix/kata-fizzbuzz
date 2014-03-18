@@ -12,6 +12,6 @@ use FizzBuzz\PlayerInterface;
  * @method PlayerInterface[] toArray()
  * @method PlayerInterface current()
  */
-class Players extends ArrayCollection
+final class Players extends ArrayCollection
 {
 }

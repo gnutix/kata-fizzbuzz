@@ -11,6 +11,6 @@ use FizzBuzz\AbstractGameRule;
  *
  * @method AbstractGameRule[] toArray()
  */
-class GameRules extends ArrayCollection
+final class GameRules extends ArrayCollection
 {
 }

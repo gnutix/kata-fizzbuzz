@@ -59,13 +59,13 @@ class GameTest extends \PHPUnit_Framework_TestCase
             $players->add(new ChuckNorris());
         }
 
-        $rounds->add(new Round($standardRulesSet, $players));
+        $rounds->add(new Round($standardRulesSet->getRules(), $players));
 
         $players = new Players();
         $players->add(new ChuckNorris());
         $players->add(new Nabila());
 
-        $rounds->add(new Round($standardRulesSet, $players));
+        $rounds->add(new Round($standardRulesSet->getRules(), $players));
 
         $gameResult = $game->play($rounds);
         $gameResult[0] = array_splice($gameResult[0], 2, 16);

@@ -11,18 +11,29 @@ use FizzBuzz\Rules\StandardNumberRule;
 /**
  * Standard Rules Sets
  */
-final class StandardRulesSet extends GameRules
+final class StandardRulesSet
 {
+    /** @var \FizzBuzz\Collections\GameRules */
+    protected $gameRules;
+
     /**
      * {@inheritDoc}
      */
-    public function __construct(array $elements = array())
+    public function __construct()
     {
-        parent::__construct($elements);
+        $this->gameRules = new GameRules();
 
-        $this->add(new FizzBuzzNumberRule());
-        $this->add(new FizzNumberRule());
-        $this->add(new BuzzNumberRule());
-        $this->add(new StandardNumberRule());
+        $this->gameRules->add(new FizzBuzzNumberRule());
+        $this->gameRules->add(new FizzNumberRule());
+        $this->gameRules->add(new BuzzNumberRule());
+        $this->gameRules->add(new StandardNumberRule());
+    }
+
+    /**
+     * @return \FizzBuzz\Collections\GameRules
+     */
+    public function getRules()
+    {
+        return $this->gameRules;
     }
 }
