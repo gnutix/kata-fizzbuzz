@@ -52,18 +52,20 @@ class GameTest extends \PHPUnit_Framework_TestCase
         $game = new Game();
         $rounds = new Rounds();
         $standardRulesSet = new StandardRulesSet();
+        $chuckNorris = new ChuckNorris();
 
         // Add 3 perfect players to the game
         $players = new Players();
         for ($i = 1; $i <= 3; $i++) {
-            $players->add(new ChuckNorris());
+            $players->add($chuckNorris);
         }
 
         $rounds->add(new Round($standardRulesSet->getRules(), $players));
 
         $players = new Players();
-        $players->add(new ChuckNorris());
+        $players->add($chuckNorris);
         $players->add(new Nabila());
+        $players->add(new JohnDoe($chuckNorris));
 
         $rounds->add(new Round($standardRulesSet->getRules(), $players));
 
