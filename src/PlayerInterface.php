@@ -8,12 +8,12 @@ namespace FizzBuzz;
 interface PlayerInterface
 {
     /**
-     * @param \FizzBuzz\RulesSetInterface $gameRules
+     * @param \FizzBuzz\AbstractRulesSet $gameRules
      * @param int                        $step
      *
      * @return string|null
      */
-    public function play(RulesSetInterface $gameRules, $step);
+    public function play(AbstractRulesSet $gameRules, $step);
 
     /**
      * @return string

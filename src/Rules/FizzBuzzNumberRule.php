@@ -10,20 +10,17 @@ use FizzBuzz\Exceptions\IrrelevantGameRule;
  */
 final class FizzBuzzNumberRule extends AbstractGameRule
 {
+    const FIRST_TRIGGER_NUMBER = 3;
+    const SECOND_TRIGGER_NUMBER = 5;
     const VALID_ANSWER = 'FizzBuzz';
-
-    /** @var array */
-    protected $triggerNumbers = array(3, 5);
 
     /**
      * {@inheritDoc}
      */
     public function generateValidAnswer($step)
     {
-        foreach ($this->triggerNumbers as $number) {
-            if (0 !== $step % $number) {
-                throw new IrrelevantGameRule();
-            }
+        if (0 !== $step % static::FIRST_TRIGGER_NUMBER || 0 !== $step % static::SECOND_TRIGGER_NUMBER) {
+            throw new IrrelevantGameRule();
         }
 
         return static::VALID_ANSWER;

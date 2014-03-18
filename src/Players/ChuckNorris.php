@@ -2,8 +2,7 @@
 
 namespace FizzBuzz\Players;
 
-use FizzBuzz\RulesSetInterface;
-use FizzBuzz\Exceptions\IrrelevantGameRule;
+use FizzBuzz\AbstractRulesSet;
 use FizzBuzz\PlayerInterface;
 
 /**
@@ -13,20 +12,10 @@ final class ChuckNorris implements PlayerInterface
 {
     /**
      * {@inheritDoc}
-     *
-     * @throws \DomainException
      */
-    public function play(RulesSetInterface $gameRules, $step)
+    public function play(AbstractRulesSet $gameRules, $step)
     {
-        foreach ($gameRules->toArray() as $gameRule) {
-            try {
-                return $gameRule->generateValidAnswer($step);
-            } catch (IrrelevantGameRule $exception) {
-                continue;
-            }
-        }
-
-        throw new \DomainException('The player cannot generate a valid answer based on the given game rules.');
+        return $gameRules->generateValidAnswer($step);
     }
 
     /**

@@ -12,7 +12,7 @@ final class Round implements RoundInterface
 {
     const MAX_STEPS = 100;
 
-    /** @var \FizzBuzz\RulesSetInterface */
+    /** @var \FizzBuzz\AbstractRulesSet */
     protected $gameRules;
 
     /** @var \FizzBuzz\Collections\Players */
@@ -22,10 +22,10 @@ final class Round implements RoundInterface
     protected $roundAnswers = array();
 
     /**
-     * @param \FizzBuzz\RulesSetInterface    $gameRules
+     * @param \FizzBuzz\AbstractRulesSet    $gameRules
      * @param \FizzBuzz\Collections\Players $players
      */
-    public function __construct(RulesSetInterface $gameRules, Players $players)
+    public function __construct(AbstractRulesSet $gameRules, Players $players)
     {
         $this->gameRules = $gameRules;
         $this->players = $players;
@@ -42,7 +42,12 @@ final class Round implements RoundInterface
             $playerAnswer = $this->players->current()->play($this->gameRules, $step);
 
             if (false === ($validAnswer = $this->validatePlayerAnswer($playerAnswer, $step))) {
-                $this->terminate($this->players->current(), $playerAnswer, $this->getValidAnswer($step), $step);
+                $this->terminate(
+                    $this->players->current(),
+                    $playerAnswer,
+                    $this->gameRules->generateValidAnswer($step),
+                    $step
+                );
 
                 break;
             }
@@ -92,24 +97,5 @@ final class Round implements RoundInterface
         }
 
         return false;
-    }
-
-    /**
-     * @param int $step
-     *
-     * @return null|string
-     * @throws \DomainException
-     */
-    protected function getValidAnswer($step)
-    {
-        foreach ($this->gameRules->toArray() as $gameRule) {
-            try {
-                return $gameRule->generateValidAnswer($step);
-            } catch (IrrelevantGameRule $exception) {
-                continue;
-            }
-        }
-
-        throw new \DomainException('The round cannot generate a valid answer based on the given game rules.');
     }
 }
