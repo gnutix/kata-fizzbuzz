@@ -2,7 +2,7 @@
 
 namespace FizzBuzz\Players;
 
-use FizzBuzz\AbstractRulesSet;
+use FizzBuzz\RulesSetInterface;
 use FizzBuzz\PlayerInterface;
 
 /**
@@ -13,7 +13,7 @@ final class Nabila implements PlayerInterface
     /**
      * {@inheritDoc}
      */
-    public function play(AbstractRulesSet $gameRules, $step)
+    public function play(RulesSetInterface $gameRules, $step)
     {
         return 'Hallo ?!';
     }

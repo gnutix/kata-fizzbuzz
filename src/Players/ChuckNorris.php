@@ -2,7 +2,7 @@
 
 namespace FizzBuzz\Players;
 
-use FizzBuzz\AbstractRulesSet;
+use FizzBuzz\RulesSetInterface;
 use FizzBuzz\Exceptions\IrrelevantGameRule;
 use FizzBuzz\PlayerInterface;
 
@@ -16,7 +16,7 @@ final class ChuckNorris implements PlayerInterface
      *
      * @throws \DomainException
      */
-    public function play(AbstractRulesSet $gameRules, $step)
+    public function play(RulesSetInterface $gameRules, $step)
     {
         foreach ($gameRules->toArray() as $gameRule) {
             try {

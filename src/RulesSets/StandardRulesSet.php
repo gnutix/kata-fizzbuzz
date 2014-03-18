@@ -2,21 +2,23 @@
 
 namespace FizzBuzz\RulesSets;
 
-use FizzBuzz\AbstractRulesSet;
+use Doctrine\Common\Collections\ArrayCollection;
+
 use FizzBuzz\Rules\BuzzNumberRule;
 use FizzBuzz\Rules\FizzBuzzNumberRule;
 use FizzBuzz\Rules\FizzNumberRule;
 use FizzBuzz\Rules\StandardNumberRule;
+use FizzBuzz\RulesSetInterface;
 
 /**
  * Standard Rules Set
  */
-final class StandardRulesSet extends AbstractRulesSet
+final class StandardRulesSet extends ArrayCollection implements RulesSetInterface
 {
     /**
      * {@inheritDoc}
      */
-    protected function populateRulesSet()
+    public function __construct()
     {
         $this->add(new FizzBuzzNumberRule());
         $this->add(new FizzNumberRule());

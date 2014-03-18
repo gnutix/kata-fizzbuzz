@@ -12,7 +12,7 @@ final class Round implements RoundInterface
 {
     const MAX_STEPS = 100;
 
-    /** @var \FizzBuzz\AbstractRulesSet */
+    /** @var \FizzBuzz\RulesSetInterface */
     protected $gameRules;
 
     /** @var \FizzBuzz\Collections\Players */
@@ -22,10 +22,10 @@ final class Round implements RoundInterface
     protected $roundAnswers = array();
 
     /**
-     * @param \FizzBuzz\AbstractRulesSet    $gameRules
+     * @param \FizzBuzz\RulesSetInterface    $gameRules
      * @param \FizzBuzz\Collections\Players $players
      */
-    public function __construct(AbstractRulesSet $gameRules, Players $players)
+    public function __construct(RulesSetInterface $gameRules, Players $players)
     {
         $this->gameRules = $gameRules;
         $this->players = $players;
