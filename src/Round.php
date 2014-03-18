@@ -4,7 +4,6 @@ namespace FizzBuzz;
 
 use FizzBuzz\Collections\GameRules;
 use FizzBuzz\Collections\Players;
-use FizzBuzz\Exceptions\GameException;
 use FizzBuzz\Exceptions\IrrelevantGameRule;
 
 /**

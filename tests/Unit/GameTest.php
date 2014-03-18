@@ -2,8 +2,10 @@
 
 namespace Tests\Unit;
 
+use FizzBuzz\Collections\GameRules;
 use FizzBuzz\Collections\Players;
 use FizzBuzz\Collections\Rounds;
+use FizzBuzz\RulesSets;
 use FizzBuzz\Game;
 use FizzBuzz\Players\ChuckNorris;
 use FizzBuzz\Players\JohnDoe;
@@ -12,7 +14,6 @@ use FizzBuzz\Round;
 use FizzBuzz\Rules\BuzzNumberRule;
 use FizzBuzz\Rules\FizzBuzzNumberRule;
 use FizzBuzz\Rules\FizzNumberRule;
-use FizzBuzz\RulesSets\StandardRulesSet;
 
 /**
  * Game Test
@@ -51,7 +52,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
     {
         $game = new Game();
         $rounds = new Rounds();
-        $standardRulesSet = new StandardRulesSet();
+        $rulesSet = new RulesSets(new GameRules());
         $chuckNorris = new ChuckNorris();
 
         // Add 3 perfect players to the game
@@ -60,14 +61,14 @@ class GameTest extends \PHPUnit_Framework_TestCase
             $players->add($chuckNorris);
         }
 
-        $rounds->add(new Round($standardRulesSet->getRules(), $players));
+        $rounds->add(new Round($rulesSet->getStandard(), $players));
 
         $players = new Players();
         $players->add($chuckNorris);
         $players->add(new Nabila());
         $players->add(new JohnDoe($chuckNorris));
 
-        $rounds->add(new Round($standardRulesSet->getRules(), $players));
+        $rounds->add(new Round($rulesSet->getStandard(), $players));
 
         $gameResult = $game->play($rounds);
         $gameResult[0] = array_splice($gameResult[0], 2, 16);

@@ -10,8 +10,6 @@ use FizzBuzz\Collections\Rounds;
 final class Game
 {
     /**
-     * Play a round
-     *
      * @param \FizzBuzz\Collections\Rounds $rounds
      *
      * @return array
