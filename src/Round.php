@@ -33,7 +33,7 @@ final class Round implements RoundInterface
     }
 
     /**
-     * Start the round
+     * {@inheritDoc}
      */
     public function start()
     {
@@ -59,7 +59,7 @@ final class Round implements RoundInterface
     }
 
     /**
-     * Terminate the round
+     * {@inheritDoc}
      */
     public function terminate(PlayerInterface $player, $playerAnswer, $validAnswer, $step)
     {

@@ -2,77 +2,41 @@
 
 namespace Tests\Unit;
 
-use FizzBuzz\Collections\GameRules;
-use FizzBuzz\Collections\Players;
 use FizzBuzz\Collections\Rounds;
-use FizzBuzz\RulesSets;
 use FizzBuzz\Game;
-use FizzBuzz\Players\ChuckNorris;
-use FizzBuzz\Players\JohnDoe;
-use FizzBuzz\Players\Nabila;
-use FizzBuzz\Round;
-use FizzBuzz\Rules\BuzzNumberRule;
-use FizzBuzz\Rules\FizzBuzzNumberRule;
-use FizzBuzz\Rules\FizzNumberRule;
 
 /**
  * Game Test
  */
 class GameTest extends \PHPUnit_Framework_TestCase
 {
-    protected $gameResult = array(
-        array(
-            FizzNumberRule::VALID_ANSWER,
-            4,
-            BuzzNumberRule::VALID_ANSWER,
-            FizzNumberRule::VALID_ANSWER,
-            7,
-            8,
-            FizzNumberRule::VALID_ANSWER,
-            BuzzNumberRule::VALID_ANSWER,
-            11,
-            FizzNumberRule::VALID_ANSWER,
-            13,
-            14,
-            FizzBuzzNumberRule::VALID_ANSWER,
-            16,
-            17,
-            FizzNumberRule::VALID_ANSWER
-        ),
-        array(
-            1,
-            '"Nabila" failed at round #2 with answer "Hallo ?!" (correct answer was "2").'
-        )
-    );
+    /** @var \FizzBuzz\Game */
+    protected $sut;
 
     /**
-     * Test playing the game
+     * {@inheritDoc}
      */
-    public function testPlayingGame()
+    public function setUp()
     {
-        $game = new Game();
-        $rounds = new Rounds();
-        $rulesSet = new RulesSets(new GameRules());
-        $chuckNorris = new ChuckNorris();
+        $this->sut = new Game();
+    }
 
-        // Add 3 perfect players to the game
-        $players = new Players();
-        for ($i = 1; $i <= 3; $i++) {
-            $players->add($chuckNorris);
+    /**
+     * @test
+     */
+    public function testGameStartRounds()
+    {
+        /** @var \FizzBuzz\RoundInterface|\PHPUnit_Framework_MockObject_MockObject $round */
+        $round = $this->getMock('\FizzBuzz\RoundInterface');
+        $rounds = new Rounds();
+
+        $nbRounds = 3;
+        for ($i = 1; $i <= $nbRounds; $i++) {
+            $rounds->add($round);
         }
 
-        $rounds->add(new Round($rulesSet->getStandard(), $players));
+        $round->expects($this->exactly($nbRounds))->method('start');
 
-        $players = new Players();
-        $players->add($chuckNorris);
-        $players->add(new Nabila());
-        $players->add(new JohnDoe($chuckNorris));
-
-        $rounds->add(new Round($rulesSet->getStandard(), $players));
-
-        $gameResult = $game->play($rounds);
-        $gameResult[0] = array_splice($gameResult[0], 2, 16);
-
-        $this->assertEquals($this->gameResult, $gameResult);
+        $this->assertTrue(is_array($this->sut->play($rounds)));
     }
 }
