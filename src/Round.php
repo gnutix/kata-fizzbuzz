@@ -29,11 +29,6 @@ final class Round implements RoundInterface
      */
     public function __construct(GameRules $gameRules, Players $players)
     {
-        // Shuffle the players
-        $playersArray = $players->toArray();
-        shuffle($playersArray);
-        $players = new Players($playersArray);
-
         $this->gameRules = $gameRules;
         $this->players = $players;
     }
