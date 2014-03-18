@@ -2,7 +2,6 @@
 
 namespace FizzBuzz;
 
-use FizzBuzz\Collections\GameRules;
 use FizzBuzz\Collections\Players;
 use FizzBuzz\Exceptions\IrrelevantGameRule;
 
@@ -13,7 +12,7 @@ final class Round implements RoundInterface
 {
     const MAX_STEPS = 100;
 
-    /** @var \FizzBuzz\Collections\GameRules */
+    /** @var \FizzBuzz\AbstractRulesSet */
     protected $gameRules;
 
     /** @var \FizzBuzz\Collections\Players */
@@ -23,10 +22,10 @@ final class Round implements RoundInterface
     protected $roundAnswers = array();
 
     /**
-     * @param \FizzBuzz\Collections\GameRules $gameRules
-     * @param \FizzBuzz\Collections\Players   $players
+     * @param \FizzBuzz\AbstractRulesSet    $gameRules
+     * @param \FizzBuzz\Collections\Players $players
      */
-    public function __construct(GameRules $gameRules, Players $players)
+    public function __construct(AbstractRulesSet $gameRules, Players $players)
     {
         $this->gameRules = $gameRules;
         $this->players = $players;

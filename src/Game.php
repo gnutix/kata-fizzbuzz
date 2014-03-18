@@ -16,12 +16,11 @@ final class Game
      */
     public function play(Rounds $rounds)
     {
-        $results = array();
-
-        foreach ($rounds->toArray() as $round) {
-            $results[] = $round->start();
-        }
-
-        return $results;
+        return array_map(
+            function (RoundInterface $round) {
+                return $round->start();
+            },
+            $rounds->toArray()
+        );
     }
 }

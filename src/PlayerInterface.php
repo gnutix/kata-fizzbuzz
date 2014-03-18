@@ -2,20 +2,18 @@
 
 namespace FizzBuzz;
 
-use FizzBuzz\Collections\GameRules;
-
 /**
  * Player Interface
  */
 interface PlayerInterface
 {
     /**
-     * @param \FizzBuzz\Collections\GameRules $gameRules
-     * @param int                             $step
+     * @param \FizzBuzz\AbstractRulesSet $gameRules
+     * @param int                        $step
      *
      * @return string|null
      */
-    public function play(GameRules $gameRules, $step);
+    public function play(AbstractRulesSet $gameRules, $step);
 
     /**
      * @return string

@@ -18,12 +18,10 @@ abstract class AbstractGameRule
     public function isSatisfiedBy($step, $playerAnswer)
     {
         try {
-            $validAnswer = $this->generateValidAnswer($step);
+            return $playerAnswer === $this->generateValidAnswer($step);
         } catch (IrrelevantGameRule $exception) {
             return false;
         }
-
-        return $playerAnswer === $validAnswer;
     }
 
     /**
