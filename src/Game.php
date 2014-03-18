@@ -2,40 +2,28 @@
 
 namespace FizzBuzz;
 
+use FizzBuzz\Collections\Rounds;
+
 /**
  * Game
  */
 final class Game
 {
-    /** @var int */
-    protected $start;
-
-    /** @var int */
-    protected $rounds;
-
     /**
-     * @param int $start
-     * @param int $rounds
+     * Play a round
+     *
+     * @param \FizzBuzz\Collections\Rounds $rounds
+     *
+     * @return array
      */
-    public function __construct($start = 1, $rounds = 100)
+    public function play(Rounds $rounds)
     {
-        $this->start = $start;
-        $this->rounds = $rounds;
-    }
+        $results = array();
 
-    /**
-     * @return int
-     */
-    public function getStart()
-    {
-        return $this->start;
-    }
+        foreach ($rounds->toArray() as $round) {
+            $results[] = $round->start();
+        }
 
-    /**
-     * @return int
-     */
-    public function getRounds()
-    {
-        return $this->rounds;
+        return $results;
     }
 }

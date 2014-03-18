@@ -1,4 +1,8 @@
 {
+    "require": {
+        "symfony/event-dispatcher": "*",
+        "doctrine/common": "*"
+    },
     "require-dev": {
         "phpunit/phpunit": "~3.7"
     },
