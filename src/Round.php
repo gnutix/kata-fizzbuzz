@@ -39,7 +39,7 @@ final class Round implements RoundInterface
     {
         $this->roundResult = new RoundResult();
 
-        $stepId = 0;
+        $stepId = 1;
         do {
             $step = new Step($stepId);
             $player = $this->players->current();
@@ -55,7 +55,7 @@ final class Round implements RoundInterface
             }
 
             ++$stepId;
-        } while ($stepId < static::MAX_STEPS && $isPlayerAnswerValid);
+        } while ($stepId <= static::MAX_STEPS && $isPlayerAnswerValid);
 
         return $this->roundResult;
     }
