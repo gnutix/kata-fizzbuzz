@@ -22,6 +22,8 @@ use FizzBuzz\RulesSets\StandardRulesSet;
  */
 class GameTest extends \PHPUnit_Framework_TestCase
 {
+    const MAX_STEPS = 100;
+
     /** @var array */
     protected $gameResult = array(
         array(
@@ -58,8 +60,14 @@ class GameTest extends \PHPUnit_Framework_TestCase
         $standardRulesSet = new StandardRulesSet();
         $rounds = new Rounds(
             array(
-                new Round($standardRulesSet, $this->getPerfectPlayers()),
-                new Round($standardRulesSet, $this->getMixedPlayers()),
+                new Round(
+                    $standardRulesSet,
+                    new \LimitIterator($this->getPerfectPlayers()->getInfiniteIterator(), 0, static::MAX_STEPS)
+                ),
+                new Round(
+                    $standardRulesSet,
+                    new \LimitIterator($this->getMixedPlayers()->getInfiniteIterator(), 0, static::MAX_STEPS)
+                ),
             )
         );
 
