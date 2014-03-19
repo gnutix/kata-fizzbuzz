@@ -16,7 +16,7 @@ final class ChuckNorris implements PlayerInterface
      */
     public function play(AbstractRulesSet $gameRules, Step $step)
     {
-        return $gameRules->generateValidAnswer($step);
+        return $gameRules->generateValidAnswer($step->getRawValue());
     }
 
     /**

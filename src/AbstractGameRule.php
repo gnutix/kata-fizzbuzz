@@ -3,7 +3,6 @@
 namespace FizzBuzz;
 
 use FizzBuzz\Entity\Answer;
-use FizzBuzz\Entity\Step;
 use FizzBuzz\Exceptions\IrrelevantGameRule;
 
 /**
@@ -13,24 +12,24 @@ abstract class AbstractGameRule
 {
     /**
      * @param \FizzBuzz\Entity\Answer $playerAnswer
-     * @param \FizzBuzz\Entity\Step   $step
+     * @param int                     $number
      *
      * @return bool
      */
-    public function isSatisfiedBy(Answer $playerAnswer, Step $step)
+    public function isSatisfiedBy(Answer $playerAnswer, $number)
     {
         try {
-            return $playerAnswer->isSameAs($this->generateValidAnswer($step));
+            return $playerAnswer->isSameAs($this->generateValidAnswer($number));
         } catch (IrrelevantGameRule $exception) {
             return false;
         }
     }
 
     /**
-     * @param \FizzBuzz\Entity\Step $step
+     * @param int $number
      *
      * @return \FizzBuzz\Entity\Answer
      * @throws \FizzBuzz\Exceptions\IrrelevantGameRule
      */
-    abstract public function generateValidAnswer(Step $step);
+    abstract public function generateValidAnswer($number);
 }

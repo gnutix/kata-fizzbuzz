@@ -3,7 +3,6 @@
 namespace FizzBuzz;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use FizzBuzz\Entity\Step;
 use FizzBuzz\Exceptions\IrrelevantGameRule;
 
 /**
@@ -23,25 +22,27 @@ abstract class AbstractRulesSet extends ArrayCollection
 
     /**
      * Loads the rules into the collection
+     *
+     * @codeCoverageIgnore
      */
     abstract protected function loadRules();
 
     /**
-     * @param \FizzBuzz\Entity\Step $step
+     * @param int $number
      *
      * @return \FizzBuzz\Entity\Answer
      * @throws \DomainException
      */
-    public function generateValidAnswer(Step $step)
+    public function generateValidAnswer($number)
     {
         foreach ($this->toArray() as $gameRule) {
             try {
-                return $gameRule->generateValidAnswer($step);
+                return $gameRule->generateValidAnswer($number);
             } catch (IrrelevantGameRule $exception) {
                 continue;
             }
         }
 
-        throw new \DomainException('The round cannot generate a valid answer based on the given game rules.');
+        throw new \DomainException('No valid answer can be generated from the current rules set.');
     }
 }

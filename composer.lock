@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ad1cb6f9faf4f1774f5066562b749ce5",
+    "hash": "7b84240623f014b8e6ed03ce1f58e45e",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -777,7 +777,7 @@
                     "role": "lead"
                 }
             ],
-            "description": "The PHP Unit Testing framework.",
+            "description": "The PHP Integration Testing framework.",
             "homepage": "http://www.phpunit.de/",
             "keywords": [
                 "phpunit",
