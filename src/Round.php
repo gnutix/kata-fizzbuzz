@@ -37,25 +37,21 @@ final class Round implements RoundInterface
      */
     public function play()
     {
+        $maxStep = new Step(static::MAX_STEPS);
         $this->roundResult = new RoundResult();
 
-        $stepId = 1;
-        do {
-            $step = new Step($stepId);
-            $player = $this->players->current();
+        foreach ($this->players->getInfiniteIterator() as $stepId => $player) {
+            $step = new Step($stepId + 1);
             $playerAnswer = $player->play($this->gameRules, $step);
             $validAnswer = $this->gameRules->generateValidAnswer($step);
             $isPlayerAnswerValid = $playerAnswer->isSameAs($validAnswer);
 
             $this->roundResult->add(new StepResult($player, $playerAnswer, $validAnswer, $step, $isPlayerAnswerValid));
 
-            // Iterate over players
-            if (!$this->players->next()) {
-                $this->players->first();
+            if ($step->isSameAs($maxStep) || !$isPlayerAnswerValid) {
+                break;
             }
-
-            ++$stepId;
-        } while ($stepId <= static::MAX_STEPS && $isPlayerAnswerValid);
+        }
 
         return $this->roundResult;
     }

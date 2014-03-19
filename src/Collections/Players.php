@@ -13,4 +13,11 @@ use FizzBuzz\PlayerInterface;
  */
 final class Players extends ArrayCollection
 {
+    /**
+     * @return PlayerInterface[]|\InfiniteIterator
+     */
+    public function getInfiniteIterator()
+    {
+        return new \InfiniteIterator($this->getIterator());
+    }
 }
