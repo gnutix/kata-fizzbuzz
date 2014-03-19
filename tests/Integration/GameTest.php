@@ -24,6 +24,12 @@ class GameTest extends \PHPUnit_Framework_TestCase
 {
     const MAX_STEPS = 100;
 
+    /** @var \FizzBuzz\Game */
+    protected $game;
+
+    /** @var \FizzBuzz\Collections\Rounds */
+    protected $rounds;
+
     /** @var array */
     protected $gameResult = array(
         array(
@@ -52,11 +58,33 @@ class GameTest extends \PHPUnit_Framework_TestCase
     );
 
     /**
+     * {@inheritDoc}
+     */
+    public function setUp()
+    {
+        $standardRulesSet = new StandardRulesSet();
+
+        $this->game = new Game();
+        $this->rounds = new Rounds(
+            array(
+                new Round(
+                    $standardRulesSet,
+                    new \LimitIterator($this->getPerfectPlayers()->getInfiniteIterator(), 0, static::MAX_STEPS)
+                ),
+                new Round(
+                    $standardRulesSet,
+                    new \LimitIterator($this->getMixedPlayers()->getInfiniteIterator(), 0, static::MAX_STEPS)
+                ),
+            )
+        );
+    }
+
+    /**
      * Test playing the game
      */
     public function testPlayingTheGame()
     {
-        $gameResult = $this->playTestGame();
+        $gameResult = $this->game->play($this->rounds);
 
         // Limit the results on the first round (as there's only perfect players)
         $gameResult->set(0, new RoundResult(array_values($gameResult->get(0)->slice(2, count($this->gameResult[0])))));
@@ -71,29 +99,6 @@ class GameTest extends \PHPUnit_Framework_TestCase
                 );
             }
         }
-    }
-
-    /**
-     * @return \FizzBuzz\Collections\GameResult
-     */
-    protected function playTestGame()
-    {
-        $game = new Game();
-        $standardRulesSet = new StandardRulesSet();
-        $rounds = new Rounds(
-            array(
-                new Round(
-                    $standardRulesSet,
-                    new \LimitIterator($this->getPerfectPlayers()->getInfiniteIterator(), 0, static::MAX_STEPS)
-                ),
-                new Round(
-                    $standardRulesSet,
-                    new \LimitIterator($this->getMixedPlayers()->getInfiniteIterator(), 0, static::MAX_STEPS)
-                ),
-            )
-        );
-
-        return $game->play($rounds);
     }
 
     /**
