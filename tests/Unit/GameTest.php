@@ -35,6 +35,9 @@ class GameTest extends \PHPUnit_Framework_TestCase
 
         $round->expects($this->exactly($nbRounds))->method('start');
 
-        $this->assertTrue(is_array($this->sut->play($rounds)));
+        $gameResult = $this->sut->play($rounds);
+
+        $this->assertTrue(is_array($gameResult));
+        $this->assertCount(3, $gameResult);
     }
 }
