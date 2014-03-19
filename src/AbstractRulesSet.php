@@ -24,7 +24,7 @@ abstract class AbstractRulesSet extends ArrayCollection
     /**
      * Loads the rules into the collection
      */
-    protected abstract function loadRules();
+    abstract protected function loadRules();
 
     /**
      * @param int $step
