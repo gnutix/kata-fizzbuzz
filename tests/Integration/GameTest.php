@@ -67,16 +67,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
 
                 $this->assertTrue(
                     $stepResult->getPlayerAnswer()->isSameAs(new Answer($expectedAnswer)),
-                    vsprintf(
-                        'Round #%s, step #%s : player "%s" answered "%s", expected answer: "%s".',
-                        array(
-                            $roundId,
-                            $stepId,
-                            (string) $stepResult->getPlayer(),
-                            (string) $stepResult->getPlayerAnswer(),
-                            $expectedAnswer,
-                        )
-                    )
+                    'Expected answer : '.$expectedAnswer.'. Step result : '.(string) $stepResult
                 );
             }
         }
