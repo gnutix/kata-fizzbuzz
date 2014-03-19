@@ -1,4 +1,7 @@
 {
+    "name": "gnutix/kata-fizzbuzz",
+    "description": "Coding Kata training of the Fizz Buzz game.",
+    "license": "MIT",
     "require": {
         "symfony/event-dispatcher": "~2.4",
         "doctrine/common": "~2.4"
