@@ -50,28 +50,42 @@ class GameTest extends \PHPUnit_Framework_TestCase
     public function testPlayingGame()
     {
         $game = new Game();
-        $rounds = new Rounds();
         $standardRulesSet = new StandardRulesSet();
-        $chuckNorris = new ChuckNorris();
 
-        // Add 3 perfect players to the game
-        $players = new Players();
-        for ($i = 1; $i <= 3; $i++) {
-            $players->add($chuckNorris);
-        }
-
-        $rounds->add(new Round($standardRulesSet, $players));
-
-        $players = new Players();
-        $players->add($chuckNorris);
-        $players->add(new Nabila());
-        $players->add(new JohnDoe($chuckNorris));
-
-        $rounds->add(new Round($standardRulesSet, $players));
+        $rounds = new Rounds();
+        $rounds->add(new Round($standardRulesSet, $this->getPerfectPlayers()));
+        $rounds->add(new Round($standardRulesSet, $this->getMixedPlayers()));
 
         $gameResult = $game->play($rounds);
         $gameResult[0] = array_splice($gameResult[0], 2, 16);
 
         $this->assertEquals($this->gameResult, $gameResult);
+    }
+
+    /**
+     * @return \FizzBuzz\Collections\Players
+     */
+    protected function getPerfectPlayers()
+    {
+        $players = new Players();
+        for ($i = 1; $i <= 3; $i++) {
+            $players->add(new ChuckNorris());
+        }
+
+        return $players;
+    }
+
+    /**
+     * @return \FizzBuzz\Collections\Players
+     */
+    protected function getMixedPlayers()
+    {
+        $chuckNorris = new ChuckNorris();
+        $players = new Players();
+        $players->add($chuckNorris);
+        $players->add(new Nabila());
+        $players->add(new JohnDoe($chuckNorris));
+
+        return $players;
     }
 }
