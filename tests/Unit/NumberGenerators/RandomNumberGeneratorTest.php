@@ -38,7 +38,6 @@ class RandomNumberGeneratorTest extends \PHPUnit_Framework_TestCase
         return array(
             array(0, 1),
             array(1, 10),
-            array(10, 1),
         );
     }
 }
