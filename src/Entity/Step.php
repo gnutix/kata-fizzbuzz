@@ -13,7 +13,7 @@ final class Step implements ValueObjectInterface
     protected $step;
 
     /**
-     * @param int $step
+     * {@inheritDoc}
      */
     public function __construct($step)
     {
