@@ -7,7 +7,7 @@ use FizzBuzz\ValueObjectInterface;
 /**
  * Step
  */
-class Step implements ValueObjectInterface
+final class Step implements ValueObjectInterface
 {
     /** @var int */
     protected $step;

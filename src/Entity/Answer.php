@@ -7,7 +7,7 @@ use FizzBuzz\ValueObjectInterface;
 /**
  * Answer
  */
-class Answer implements ValueObjectInterface
+final class Answer implements ValueObjectInterface
 {
     /** @var mixed */
     protected $answer;

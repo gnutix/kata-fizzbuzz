@@ -8,7 +8,7 @@ use FizzBuzz\Entity\Step;
 /**
  * Step Result
  */
-class StepResult
+final class StepResult
 {
     /** @var \FizzBuzz\PlayerInterface */
     protected $player;

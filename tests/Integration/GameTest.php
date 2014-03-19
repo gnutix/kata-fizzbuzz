@@ -7,6 +7,7 @@ use FizzBuzz\Collections\RoundResult;
 use FizzBuzz\Collections\Rounds;
 use FizzBuzz\Entity\Answer;
 use FizzBuzz\Game;
+use FizzBuzz\NumberGenerators\FakeNumberGenerator;
 use FizzBuzz\Players\ChuckNorris;
 use FizzBuzz\Players\JohnDoe;
 use FizzBuzz\Players\Nabila;
@@ -43,6 +44,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
         ),
         array(
             1,
+            2,
             'Hallo ?!',
         )
     );
@@ -68,8 +70,20 @@ class GameTest extends \PHPUnit_Framework_TestCase
 
         foreach ($gameResult->toArray() as $roundId => $roundResult) {
             foreach ($roundResult->toArray() as $stepId => $stepResult) {
+                $expectedAnswer = $this->gameResult[$roundId][$stepId];
+
                 $this->assertTrue(
-                    $stepResult->getPlayerAnswer()->isSameAs(new Answer($this->gameResult[$roundId][$stepId]))
+                    $stepResult->getPlayerAnswer()->isSameAs(new Answer($expectedAnswer)),
+                    vsprintf(
+                        'Round #%s, step #%s : player "%s" answered "%s", expected answer: "%s".',
+                        array(
+                            $roundId,
+                            $stepId,
+                            (string) $stepResult->getPlayer(),
+                            (string) $stepResult->getPlayerAnswer(),
+                            $expectedAnswer,
+                        )
+                    )
                 );
             }
         }
@@ -97,8 +111,8 @@ class GameTest extends \PHPUnit_Framework_TestCase
 
         $players = new Players();
         $players->add($chuckNorris);
+        $players->add(new JohnDoe($chuckNorris, new FakeNumberGenerator(1)));
         $players->add(new Nabila());
-        $players->add(new JohnDoe($chuckNorris));
 
         return $players;
     }
