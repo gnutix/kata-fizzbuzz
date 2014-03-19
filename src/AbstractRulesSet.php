@@ -3,7 +3,7 @@
 namespace FizzBuzz;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use FizzBuzz\Exceptions\IrrelevantGameRule;
+use FizzBuzz\Exceptions\IrrelevantGameRuleException;
 
 /**
  * Abstract Rules Set
@@ -38,7 +38,7 @@ abstract class AbstractRulesSet extends ArrayCollection
         foreach ($this->toArray() as $gameRule) {
             try {
                 return $gameRule->generateValidAnswer($number);
-            } catch (IrrelevantGameRule $exception) {
+            } catch (IrrelevantGameRuleException $exception) {
                 continue;
             }
         }

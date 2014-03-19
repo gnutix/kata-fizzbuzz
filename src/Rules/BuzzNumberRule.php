@@ -4,7 +4,7 @@ namespace FizzBuzz\Rules;
 
 use FizzBuzz\AbstractGameRule;
 use FizzBuzz\Entity\Answer;
-use FizzBuzz\Exceptions\IrrelevantGameRule;
+use FizzBuzz\Exceptions\IrrelevantGameRuleException;
 
 /**
  * Buzz Number Rule
@@ -23,6 +23,6 @@ final class BuzzNumberRule extends AbstractGameRule
             return new Answer(static::VALID_ANSWER);
         }
 
-        throw new IrrelevantGameRule();
+        throw new IrrelevantGameRuleException();
     }
 }

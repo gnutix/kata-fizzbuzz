@@ -3,7 +3,7 @@
 namespace FizzBuzz;
 
 use FizzBuzz\Entity\Answer;
-use FizzBuzz\Exceptions\IrrelevantGameRule;
+use FizzBuzz\Exceptions\IrrelevantGameRuleException;
 
 /**
  * Game Rule
@@ -20,7 +20,7 @@ abstract class AbstractGameRule
     {
         try {
             return $playerAnswer->isSameAs($this->generateValidAnswer($number));
-        } catch (IrrelevantGameRule $exception) {
+        } catch (IrrelevantGameRuleException $exception) {
             return false;
         }
     }
@@ -29,7 +29,7 @@ abstract class AbstractGameRule
      * @param int $number
      *
      * @return \FizzBuzz\Entity\Answer
-     * @throws \FizzBuzz\Exceptions\IrrelevantGameRule
+     * @throws \FizzBuzz\Exceptions\IrrelevantGameRuleException
      */
     abstract public function generateValidAnswer($number);
 }
