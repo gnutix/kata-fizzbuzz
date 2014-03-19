@@ -8,4 +8,11 @@
             <directory suffix="Test.php">tests/Integration/</directory>
         </testsuite>
     </testsuites>
+
+    <!-- Code coverage configuration -->
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src/</directory>
+        </whitelist>
+    </filter>
 </phpunit>

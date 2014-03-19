@@ -2,10 +2,12 @@
 
 namespace FizzBuzz\Entity;
 
+use FizzBuzz\ValueObjectInterface;
+
 /**
  * Answer
  */
-class Answer
+class Answer implements ValueObjectInterface
 {
     /** @var mixed */
     protected $answer;
@@ -19,13 +21,11 @@ class Answer
     }
 
     /**
-     * @param \FizzBuzz\Entity\Answer $answer
-     *
-     * @return bool
+     * {@inheritDoc}
      */
-    public function isSameAs(Answer $answer)
+    public function isSameAs(ValueObjectInterface $valueObject)
     {
-        return $this === $answer;
+        return $this === $valueObject;
     }
 
     /**

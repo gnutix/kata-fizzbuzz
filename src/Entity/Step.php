@@ -2,10 +2,12 @@
 
 namespace FizzBuzz\Entity;
 
+use FizzBuzz\ValueObjectInterface;
+
 /**
  * Step
  */
-class Step
+class Step implements ValueObjectInterface
 {
     /** @var int */
     protected $step;
@@ -19,17 +21,15 @@ class Step
     }
 
     /**
-     * @param \FizzBuzz\Entity\Step $step
-     *
-     * @return bool
+     * {@inheritDoc}
      */
-    public function isSameAs(Step $step)
+    public function isSameAs(ValueObjectInterface $valueObject)
     {
-        return $this === $step;
+        return $this === $valueObject;
     }
 
     /**
-     * @return string
+     * {@inheritDoc}
      */
     public function __toString()
     {
