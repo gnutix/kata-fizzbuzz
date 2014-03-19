@@ -3,7 +3,6 @@
 namespace FizzBuzz;
 
 use Doctrine\Common\Collections\ArrayCollection;
-
 use FizzBuzz\Exceptions\IrrelevantGameRule;
 
 /**

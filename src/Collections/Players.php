@@ -3,7 +3,6 @@
 namespace FizzBuzz\Collections;
 
 use Doctrine\Common\Collections\ArrayCollection;
-
 use FizzBuzz\PlayerInterface;
 
 /**
