@@ -39,7 +39,8 @@ final class Round implements RoundInterface
     {
         $this->roundResult = new RoundResult();
 
-        for ($stepId = 1; $stepId <= static::MAX_STEPS; $stepId++) {
+        $stepId = 0;
+        do {
             $step = new Step($stepId);
             $player = $this->players->current();
             $playerAnswer = $player->play($this->gameRules, $step);
@@ -48,16 +49,13 @@ final class Round implements RoundInterface
 
             $this->roundResult->add(new StepResult($player, $playerAnswer, $validAnswer, $step, $isPlayerAnswerValid));
 
-            // Stop the round upon failure
-            if (false === $isPlayerAnswerValid) {
-                return $this->roundResult;
-            }
-
             // Iterate over players
             if (!$this->players->next()) {
                 $this->players->first();
             }
-        }
+
+            ++$stepId;
+        } while ($stepId < static::MAX_STEPS && $isPlayerAnswerValid);
 
         return $this->roundResult;
     }
