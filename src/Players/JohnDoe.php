@@ -3,6 +3,8 @@
 namespace FizzBuzz\Players;
 
 use FizzBuzz\AbstractRulesSet;
+use FizzBuzz\Entity\Answer;
+use FizzBuzz\Entity\Step;
 use FizzBuzz\PlayerInterface;
 
 /**
@@ -24,10 +26,10 @@ final class JohnDoe implements PlayerInterface
     /**
      * {@inheritDoc}
      */
-    public function play(AbstractRulesSet $gameRules, $step)
+    public function play(AbstractRulesSet $gameRules, Step $step)
     {
         if (0 === mt_rand(0, 1)) {
-            return '?';
+            return new Answer('?');
         }
 
         return $this->player->play($gameRules, $step);

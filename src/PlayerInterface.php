@@ -2,6 +2,8 @@
 
 namespace FizzBuzz;
 
+use FizzBuzz\Entity\Step;
+
 /**
  * Player Interface
  */
@@ -9,11 +11,11 @@ interface PlayerInterface
 {
     /**
      * @param \FizzBuzz\AbstractRulesSet $gameRules
-     * @param int                        $step
+     * @param \FizzBuzz\Entity\Step      $step
      *
-     * @return string|null
+     * @return \FizzBuzz\Entity\Answer
      */
-    public function play(AbstractRulesSet $gameRules, $step);
+    public function play(AbstractRulesSet $gameRules, Step $step);
 
     /**
      * @return string

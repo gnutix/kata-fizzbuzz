@@ -2,6 +2,7 @@
 
 namespace Tests\Integration;
 
+use FizzBuzz\Collections\GameResult;
 use FizzBuzz\Collections\Players;
 use FizzBuzz\Collections\Rounds;
 use FizzBuzz\Game;
@@ -37,11 +38,11 @@ class GameTest extends \PHPUnit_Framework_TestCase
             FizzBuzzNumberRule::VALID_ANSWER,
             16,
             17,
-            FizzNumberRule::VALID_ANSWER
+            FizzNumberRule::VALID_ANSWER,
         ),
         array(
             1,
-            '"Nabila" failed at round #2 with answer "Hallo ?!" (correct answer was "2").'
+            'Hallo ?!',
         )
     );
 
@@ -52,18 +53,23 @@ class GameTest extends \PHPUnit_Framework_TestCase
     {
         $game = new Game();
         $standardRulesSet = new StandardRulesSet();
-
-        $gameResult = $game->play(
-            new Rounds(
-                array(
-                    new Round($standardRulesSet, $this->getPerfectPlayers()),
-                    new Round($standardRulesSet, $this->getMixedPlayers()),
-                )
+        $rounds = new Rounds(
+            array(
+                new Round($standardRulesSet, $this->getPerfectPlayers()),
+                new Round($standardRulesSet, $this->getMixedPlayers()),
             )
         );
-        $gameResult[0] = array_splice($gameResult[0], 2, count($this->gameResult[0]));
 
-        $this->assertEquals($this->gameResult, $gameResult);
+        $gameResult = $game->play($rounds);
+        $gameResult->set(0, new GameResult($gameResult->get(0)->slice(2, $gameResult->get(0)->count())));
+
+        for ($i = 0; $i < $rounds->count(); $i++) {
+            $gameAnswersArray = $gameResult->toArray();
+
+            foreach ($gameAnswersArray[$i]->toArray() as $index => $stepResult) {
+                $this->assertEquals((string) $stepResult->getPlayerAnswer(), $this->gameResult[$i][$index]);
+            }
+        }
     }
 
     /**

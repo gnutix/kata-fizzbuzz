@@ -2,8 +2,9 @@
 
 namespace FizzBuzz;
 
+use FizzBuzz\Collections\RoundResult;
+use FizzBuzz\Entity\Step;
 use FizzBuzz\Collections\Players;
-use FizzBuzz\Exceptions\IrrelevantGameRule;
 
 /**
  * Round
@@ -18,8 +19,8 @@ final class Round implements RoundInterface
     /** @var \FizzBuzz\Collections\Players */
     protected $players;
 
-    /** @var array */
-    protected $roundAnswers = array();
+    /** @var \FizzBuzz\Collections\RoundResult */
+    protected $roundResult;
 
     /**
      * @param \FizzBuzz\AbstractRulesSet    $gameRules
@@ -34,68 +35,30 @@ final class Round implements RoundInterface
     /**
      * {@inheritDoc}
      */
-    public function start()
+    public function play()
     {
-        $this->players->first();
+        $this->roundResult = new RoundResult();
 
-        for ($step = 1; $step <= static::MAX_STEPS; $step++) {
-            $playerAnswer = $this->players->current()->play($this->gameRules, $step);
+        for ($stepId = 1; $stepId <= static::MAX_STEPS; $stepId++) {
+            $step = new Step($stepId);
+            $player = $this->players->current();
+            $playerAnswer = $player->play($this->gameRules, $step);
+            $validAnswer = $this->gameRules->generateValidAnswer($step);
+            $isPlayerAnswerValid = $playerAnswer->isSameAs($validAnswer);
 
-            if (false === ($validAnswer = $this->validatePlayerAnswer($playerAnswer, $step))) {
-                $this->terminate(
-                    $this->players->current(),
-                    $playerAnswer,
-                    $this->gameRules->generateValidAnswer($step),
-                    $step
-                );
+            $this->roundResult->add(new StepResult($player, $playerAnswer, $validAnswer, $step, $isPlayerAnswerValid));
 
-                break;
+            // Stop the round upon failure
+            if (false === $isPlayerAnswerValid) {
+                return $this->roundResult;
             }
 
-            $this->roundAnswers[] = $validAnswer;
-
+            // Iterate over players
             if (!$this->players->next()) {
                 $this->players->first();
             }
         }
 
-        return $this->roundAnswers;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function terminate(PlayerInterface $player, $playerAnswer, $validAnswer, $step)
-    {
-        $this->roundAnswers[] = vsprintf(
-            '"%s" failed at round #%s with answer "%s" (correct answer was "%s").',
-            array(
-                (string) $player,
-                $step,
-                $playerAnswer,
-                $validAnswer
-            )
-        );
-    }
-
-    /**
-     * @param string|null $playerAnswer
-     * @param int         $step
-     *
-     * @return bool
-     */
-    protected function validatePlayerAnswer($playerAnswer, $step)
-    {
-        foreach ($this->gameRules->toArray() as $gameRule) {
-            try {
-                if ($gameRule->isSatisfiedBy($step, $playerAnswer)) {
-                    return $playerAnswer;
-                }
-            } catch (IrrelevantGameRule $exception) {
-                continue;
-            }
-        }
-
-        return false;
+        return $this->roundResult;
     }
 }

@@ -3,6 +3,8 @@
 namespace FizzBuzz\Rules;
 
 use FizzBuzz\AbstractGameRule;
+use FizzBuzz\Entity\Answer;
+use FizzBuzz\Entity\Step;
 use FizzBuzz\Exceptions\IrrelevantGameRule;
 
 /**
@@ -16,10 +18,10 @@ final class BuzzNumberRule extends AbstractGameRule
     /**
      * {@inheritDoc}
      */
-    public function generateValidAnswer($step)
+    public function generateValidAnswer(Step $step)
     {
-        if (0 === $step % static::TRIGGER_NUMBER) {
-            return static::VALID_ANSWER;
+        if (0 === ((string) $step % static::TRIGGER_NUMBER)) {
+            return new Answer(static::VALID_ANSWER);
         }
 
         throw new IrrelevantGameRule();

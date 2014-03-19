@@ -33,11 +33,11 @@ class GameTest extends \PHPUnit_Framework_TestCase
             $rounds->add($round);
         }
 
-        $round->expects($this->exactly($nbRounds))->method('start');
+        $round->expects($this->exactly($nbRounds))->method('play');
 
         $gameResult = $this->sut->play($rounds);
 
-        $this->assertTrue(is_array($gameResult));
+        $this->assertInstanceOf('FizzBuzz\Collections\GameResult', $gameResult);
         $this->assertCount(3, $gameResult);
     }
 }

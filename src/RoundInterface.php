@@ -9,16 +9,8 @@ interface RoundInterface
 {
     /**
      * Start the round
-     */
-    public function start();
-
-    /**
-     * Terminate the round
      *
-     * @param \FizzBuzz\PlayerInterface $player
-     * @param string|null               $playerAnswer
-     * @param string                    $validAnswer
-     * @param int                       $step
+     * @return \FizzBuzz\Collections\RoundResult
      */
-    public function terminate(PlayerInterface $player, $playerAnswer, $validAnswer, $step);
+    public function play();
 }

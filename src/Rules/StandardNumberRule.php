@@ -3,6 +3,8 @@
 namespace FizzBuzz\Rules;
 
 use FizzBuzz\AbstractGameRule;
+use FizzBuzz\Entity\Answer;
+use FizzBuzz\Entity\Step;
 
 /**
  * Standard Number Rule
@@ -10,12 +12,10 @@ use FizzBuzz\AbstractGameRule;
 final class StandardNumberRule extends AbstractGameRule
 {
     /**
-     * @param int $step
-     *
-     * @return string
+     * {@inheritDoc}
      */
-    public function generateValidAnswer($step)
+    public function generateValidAnswer(Step $step)
     {
-        return $step;
+        return new Answer($step);
     }
 }

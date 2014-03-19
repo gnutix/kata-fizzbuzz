@@ -2,6 +2,7 @@
 
 namespace FizzBuzz;
 
+use FizzBuzz\Collections\GameResult;
 use FizzBuzz\Collections\Rounds;
 
 /**
@@ -12,15 +13,17 @@ final class Game
     /**
      * @param \FizzBuzz\Collections\Rounds $rounds
      *
-     * @return array
+     * @return \FizzBuzz\Collections\GameResult
      */
     public function play(Rounds $rounds)
     {
-        return array_map(
-            function (RoundInterface $round) {
-                return $round->start();
-            },
-            $rounds->toArray()
+        return new GameResult(
+            array_map(
+                function (RoundInterface $round) {
+                    return $round->play();
+                },
+                $rounds->toArray()
+            )
         );
     }
 }

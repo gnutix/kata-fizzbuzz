@@ -3,6 +3,8 @@
 namespace FizzBuzz\Players;
 
 use FizzBuzz\AbstractRulesSet;
+use FizzBuzz\Entity\Answer;
+use FizzBuzz\Entity\Step;
 use FizzBuzz\PlayerInterface;
 
 /**
@@ -13,9 +15,9 @@ final class Nabila implements PlayerInterface
     /**
      * {@inheritDoc}
      */
-    public function play(AbstractRulesSet $gameRules, $step)
+    public function play(AbstractRulesSet $gameRules, Step $step)
     {
-        return 'Hallo ?!';
+        return new Answer('Hallo ?!');
     }
 
     /**

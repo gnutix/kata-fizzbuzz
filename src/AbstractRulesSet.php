@@ -3,6 +3,7 @@
 namespace FizzBuzz;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use FizzBuzz\Entity\Step;
 use FizzBuzz\Exceptions\IrrelevantGameRule;
 
 /**
@@ -26,12 +27,12 @@ abstract class AbstractRulesSet extends ArrayCollection
     abstract protected function loadRules();
 
     /**
-     * @param int $step
+     * @param \FizzBuzz\Entity\Step $step
      *
-     * @return null|string
+     * @return \FizzBuzz\Entity\Answer
      * @throws \DomainException
      */
-    public function generateValidAnswer($step)
+    public function generateValidAnswer(Step $step)
     {
         foreach ($this->toArray() as $gameRule) {
             try {
