@@ -20,6 +20,11 @@ interface ValueObjectInterface
     public function isSameAs(ValueObjectInterface $value);
 
     /**
+     * @return mixed
+     */
+    public function getRawValue();
+
+    /**
      * @return string
      */
     public function __toString();

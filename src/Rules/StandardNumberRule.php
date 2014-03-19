@@ -16,6 +16,6 @@ final class StandardNumberRule extends AbstractGameRule
      */
     public function generateValidAnswer(Step $step)
     {
-        return new Answer($step);
+        return new Answer($step->getRawValue());
     }
 }

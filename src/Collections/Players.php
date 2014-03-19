@@ -9,7 +9,6 @@ use FizzBuzz\PlayerInterface;
  * Players Collection
  *
  * @method PlayerInterface[] toArray()
- * @method PlayerInterface current()
  */
 final class Players extends ArrayCollection
 {
@@ -18,6 +17,8 @@ final class Players extends ArrayCollection
      */
     public function getInfiniteIterator()
     {
+        $this->first();
+
         return new \InfiniteIterator($this->getIterator());
     }
 }

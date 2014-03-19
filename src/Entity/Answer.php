@@ -25,7 +25,15 @@ class Answer implements ValueObjectInterface
      */
     public function isSameAs(ValueObjectInterface $valueObject)
     {
-        return $this === $valueObject;
+        return $this->getRawValue() === $valueObject->getRawValue();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRawValue()
+    {
+        return $this->answer;
     }
 
     /**

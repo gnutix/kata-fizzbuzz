@@ -37,22 +37,33 @@ final class Round implements RoundInterface
      */
     public function play()
     {
-        $maxStep = new Step(static::MAX_STEPS);
+        $iterator = new \LimitIterator($this->players->getInfiniteIterator(), 0, static::MAX_STEPS);
         $this->roundResult = new RoundResult();
 
-        foreach ($this->players->getInfiniteIterator() as $stepId => $player) {
-            $step = new Step($stepId + 1);
-            $playerAnswer = $player->play($this->gameRules, $step);
-            $validAnswer = $this->gameRules->generateValidAnswer($step);
-            $isPlayerAnswerValid = $playerAnswer->isSameAs($validAnswer);
+        foreach ($iterator as $player) {
+            $stepResult = $this->createStepResult($player, new Step($iterator->getPosition() + 1));
 
-            $this->roundResult->add(new StepResult($player, $playerAnswer, $validAnswer, $step, $isPlayerAnswerValid));
+            $this->roundResult->add($stepResult);
 
-            if ($step->isSameAs($maxStep) || !$isPlayerAnswerValid) {
+            if (!$stepResult->isValid()) {
                 break;
             }
         }
 
         return $this->roundResult;
+    }
+
+    /**
+     * @param \FizzBuzz\PlayerInterface $player
+     * @param \FizzBuzz\Entity\Step     $step
+     *
+     * @return \FizzBuzz\StepResult
+     */
+    protected function createStepResult(PlayerInterface $player, Step $step)
+    {
+        $playerAnswer = $player->play($this->gameRules, $step);
+        $validAnswer = $this->gameRules->generateValidAnswer($step);
+
+        return new StepResult($player, $playerAnswer, $validAnswer, $step, $playerAnswer->isSameAs($validAnswer));
     }
 }

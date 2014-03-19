@@ -2,9 +2,10 @@
 
 namespace Tests\Integration;
 
-use FizzBuzz\Collections\GameResult;
 use FizzBuzz\Collections\Players;
+use FizzBuzz\Collections\RoundResult;
 use FizzBuzz\Collections\Rounds;
+use FizzBuzz\Entity\Answer;
 use FizzBuzz\Game;
 use FizzBuzz\Players\ChuckNorris;
 use FizzBuzz\Players\JohnDoe;
@@ -61,13 +62,15 @@ class GameTest extends \PHPUnit_Framework_TestCase
         );
 
         $gameResult = $game->play($rounds);
-        $gameResult->set(0, new GameResult($gameResult->get(0)->slice(2, $gameResult->get(0)->count())));
 
-        for ($i = 0; $i < $rounds->count(); $i++) {
-            $gameAnswersArray = $gameResult->toArray();
+        // Limit the results on the first round (as there's only perfect players)
+        $gameResult->set(0, new RoundResult(array_values($gameResult->get(0)->slice(2, count($this->gameResult[0])))));
 
-            foreach ($gameAnswersArray[$i]->toArray() as $index => $stepResult) {
-                $this->assertEquals((string) $stepResult->getPlayerAnswer(), $this->gameResult[$i][$index]);
+        foreach ($gameResult->toArray() as $roundId => $roundResult) {
+            foreach ($roundResult->toArray() as $stepId => $stepResult) {
+                $this->assertTrue(
+                    $stepResult->getPlayerAnswer()->isSameAs(new Answer($this->gameResult[$roundId][$stepId]))
+                );
             }
         }
     }

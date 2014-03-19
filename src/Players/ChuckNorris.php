@@ -3,7 +3,6 @@
 namespace FizzBuzz\Players;
 
 use FizzBuzz\AbstractRulesSet;
-use FizzBuzz\Entity\Answer;
 use FizzBuzz\Entity\Step;
 use FizzBuzz\PlayerInterface;
 
@@ -17,7 +16,7 @@ final class ChuckNorris implements PlayerInterface
      */
     public function play(AbstractRulesSet $gameRules, Step $step)
     {
-        return new Answer($gameRules->generateValidAnswer($step));
+        return $gameRules->generateValidAnswer($step);
     }
 
     /**
