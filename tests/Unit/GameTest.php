@@ -24,14 +24,12 @@ class GameTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function testGameStartRounds()
+    public function testGameStartsEveryRounds()
     {
-        /** @var \FizzBuzz\RoundInterface|\PHPUnit_Framework_MockObject_MockObject $round */
         $round = $this->getMock('\FizzBuzz\RoundInterface');
         $rounds = new Rounds();
 
-        $nbRounds = 3;
-        for ($i = 1; $i <= $nbRounds; $i++) {
+        for ($i = 1, $nbRounds = 3; $i <= $nbRounds; $i++) {
             $rounds->add($round);
         }
 
