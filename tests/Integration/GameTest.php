@@ -19,6 +19,7 @@ use FizzBuzz\RulesSets\StandardRulesSet;
  */
 class GameTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var array */
     protected $gameResult = array(
         array(
             FizzNumberRule::VALID_ANSWER,
@@ -47,17 +48,20 @@ class GameTest extends \PHPUnit_Framework_TestCase
     /**
      * Test playing the game
      */
-    public function testPlayingGame()
+    public function testPlayingTheGame()
     {
         $game = new Game();
         $standardRulesSet = new StandardRulesSet();
 
-        $rounds = new Rounds();
-        $rounds->add(new Round($standardRulesSet, $this->getPerfectPlayers()));
-        $rounds->add(new Round($standardRulesSet, $this->getMixedPlayers()));
-
-        $gameResult = $game->play($rounds);
-        $gameResult[0] = array_splice($gameResult[0], 2, 16);
+        $gameResult = $game->play(
+            new Rounds(
+                array(
+                    new Round($standardRulesSet, $this->getPerfectPlayers()),
+                    new Round($standardRulesSet, $this->getMixedPlayers()),
+                )
+            )
+        );
+        $gameResult[0] = array_splice($gameResult[0], 2, count($this->gameResult[0]));
 
         $this->assertEquals($this->gameResult, $gameResult);
     }
@@ -81,6 +85,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
     protected function getMixedPlayers()
     {
         $chuckNorris = new ChuckNorris();
+
         $players = new Players();
         $players->add($chuckNorris);
         $players->add(new Nabila());
