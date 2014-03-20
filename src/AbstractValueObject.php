@@ -19,7 +19,7 @@ abstract class AbstractValueObject
     }
 
     /**
-     * @param static $value
+     * @param self $value
      *
      * @return bool
      * @throws \InvalidArgumentException
