@@ -19,14 +19,14 @@ abstract class AbstractValueObject
     }
 
     /**
-     * @param self $value
+     * @param static $value
      *
      * @return bool
      * @throws \InvalidArgumentException
      */
     public function isSameAs($value)
     {
-        if (!($value instanceof static)) {
+        if (!($value instanceof AbstractValueObject) || get_class($value) !== get_class($this)) {
             throw new \InvalidArgumentException(
                 'You can only compare a ValueObject with another ValueObject of the same type.'
             );
