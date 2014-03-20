@@ -31,8 +31,6 @@ final class StepResult
      * @param \FizzBuzz\Entity\Answer   $validAnswer
      * @param \FizzBuzz\Entity\Step     $step
      * @param bool                      $isValid
-     *
-     * @internal param \FizzBuzz\Entity\Answer $answer
      */
     public function __construct(
         PlayerInterface $player,

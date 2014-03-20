@@ -13,19 +13,14 @@ use FizzBuzz\PlayerInterface;
  */
 final class JohnDoe implements PlayerInterface
 {
-    /** @var \FizzBuzz\Players\ChuckNorris */
-    protected $player;
-
     /** @var \FizzBuzz\NumberGeneratorInterface */
     protected $numberGenerator;
 
     /**
-     * @param \FizzBuzz\Players\ChuckNorris      $player
      * @param \FizzBuzz\NumberGeneratorInterface $numberGenerator
      */
-    public function __construct(ChuckNorris $player, NumberGeneratorInterface $numberGenerator)
+    public function __construct(NumberGeneratorInterface $numberGenerator)
     {
-        $this->player = $player;
         $this->numberGenerator = $numberGenerator;
     }
 
@@ -38,7 +33,7 @@ final class JohnDoe implements PlayerInterface
             return new Answer('?');
         }
 
-        return $this->player->play($gameRules, $step);
+        return $gameRules->generateValidAnswer($step->getRawValue());
     }
 
     /**

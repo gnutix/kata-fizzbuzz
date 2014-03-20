@@ -119,11 +119,9 @@ class GameTest extends \PHPUnit_Framework_TestCase
      */
     protected function getMixedPlayers()
     {
-        $chuckNorris = new ChuckNorris();
-
         $players = new Players();
-        $players->add($chuckNorris);
-        $players->add(new JohnDoe($chuckNorris, new FakeNumberGenerator(1)));
+        $players->add(new ChuckNorris());
+        $players->add(new JohnDoe(new FakeNumberGenerator(1)));
         $players->add(new Nabila());
 
         return $players;

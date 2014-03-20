@@ -4,8 +4,8 @@ namespace Tests\Unit\Players;
 
 use FizzBuzz\Entity\Answer;
 use FizzBuzz\Entity\Step;
+use FizzBuzz\NumberGeneratorInterface;
 use FizzBuzz\NumberGenerators\FakeNumberGenerator;
-use FizzBuzz\Players\ChuckNorris;
 use FizzBuzz\Players\JohnDoe;
 use FizzBuzz\Rules\FizzNumberRule;
 use FizzBuzz\RulesSets\StandardRulesSet;
@@ -27,15 +27,15 @@ class JohnDoeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param int   $fakeNumber
-     * @param int   $stepNumber
-     * @param mixed $expectedAnswer
+     * @param \FizzBuzz\NumberGeneratorInterface $numberGenerator
+     * @param int                                $stepNumber
+     * @param mixed                              $expectedAnswer
      *
      * @dataProvider getFakeRandomGeneratorNumbers
      */
-    public function testJohnDoeRandomAnswers($fakeNumber, $stepNumber, $expectedAnswer)
+    public function testJohnDoeRandomAnswers(NumberGeneratorInterface $numberGenerator, $stepNumber, $expectedAnswer)
     {
-        $player = new JohnDoe(new ChuckNorris(), new FakeNumberGenerator($fakeNumber));
+        $player = new JohnDoe($numberGenerator);
 
         $this->assertEquals(new Answer($expectedAnswer), $player->play($this->gameRules, new Step($stepNumber)));
     }
@@ -46,10 +46,10 @@ class JohnDoeTest extends \PHPUnit_Framework_TestCase
     public function getFakeRandomGeneratorNumbers()
     {
         return array(
-            array(0, 1, '?'),
-            array(1, 1, 1),
-            array(0, 3, '?'),
-            array(1, 3, FizzNumberRule::VALID_ANSWER),
+            array(new FakeNumberGenerator(0), 1, '?'),
+            array(new FakeNumberGenerator(1), 1, 1),
+            array(new FakeNumberGenerator(0), 3, '?'),
+            array(new FakeNumberGenerator(1), 3, FizzNumberRule::VALID_ANSWER),
         );
     }
 }
