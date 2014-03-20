@@ -8,9 +8,14 @@ namespace FizzBuzz;
 interface RoundInterface
 {
     /**
-     * Start the round
+     * @param \LimitIterator $players
+     */
+    public function __construct(\LimitIterator $players);
+
+    /**
+     * @param \FizzBuzz\AbstractRulesSet $gameRules
      *
      * @return \FizzBuzz\Collections\RoundResult
      */
-    public function play();
+    public function play(AbstractRulesSet $gameRules);
 }

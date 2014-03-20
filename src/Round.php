@@ -10,57 +10,55 @@ use FizzBuzz\Entity\Step;
  */
 final class Round implements RoundInterface
 {
-    /** @var \FizzBuzz\AbstractRulesSet */
-    protected $gameRules;
-
-    /** @var \Iterator */
-    protected $iterator;
-
-    /** @var \FizzBuzz\Collections\RoundResult */
-    protected $roundResult;
+    /** @var \LimitIterator */
+    protected $players;
 
     /**
-     * @param \FizzBuzz\AbstractRulesSet $gameRules
-     * @param \Iterator                  $iterator
+     * @param \LimitIterator $players
      */
-    public function __construct(AbstractRulesSet $gameRules, \Iterator $iterator)
+    public function __construct(\LimitIterator $players)
     {
-        $this->gameRules = $gameRules;
-        $this->iterator = $iterator;
+        $this->players = $players;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function play()
+    public function play(AbstractRulesSet $gameRules)
     {
-        $this->roundResult = new RoundResult();
+        $roundResult = new RoundResult();
 
-        $stepId = 1;
-        foreach ($this->iterator as $player) {
-            $stepResult = $this->createStepResult($player, new Step($stepId));
-            $this->roundResult->add($stepResult);
+        foreach ($this->players as $player) {
+            $stepResult = $this->createStepResult($gameRules, $player, $this->createStep());
+            $roundResult->add($stepResult);
 
             if (!$stepResult->isValid()) {
                 break;
             }
-
-            ++$stepId;
         }
 
-        return $this->roundResult;
+        return $roundResult;
     }
 
     /**
-     * @param \FizzBuzz\PlayerInterface $player
-     * @param \FizzBuzz\Entity\Step     $step
+     * @return \FizzBuzz\Entity\Step
+     */
+    protected function createStep()
+    {
+        return new Step($this->players->getPosition() + 1);
+    }
+
+    /**
+     * @param \FizzBuzz\AbstractRulesSet $gameRules
+     * @param \FizzBuzz\PlayerInterface  $player
+     * @param \FizzBuzz\Entity\Step      $step
      *
      * @return \FizzBuzz\StepResult
      */
-    protected function createStepResult(PlayerInterface $player, Step $step)
+    protected function createStepResult(AbstractRulesSet $gameRules, PlayerInterface $player, Step $step)
     {
-        $playerAnswer = $player->play($this->gameRules, $step);
-        $validAnswer = $this->gameRules->generateValidAnswer($step->getRawValue());
+        $playerAnswer = $player->play($gameRules, $step);
+        $validAnswer = $gameRules->generateValidAnswer($step->getRawValue());
 
         return new StepResult($player, $playerAnswer, $validAnswer, $step, $playerAnswer->isSameAs($validAnswer));
     }

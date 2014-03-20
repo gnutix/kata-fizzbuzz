@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use FizzBuzz\Collections\Rounds;
 use FizzBuzz\Game;
+use FizzBuzz\RulesSets\StandardRulesSet;
 
 /**
  * Game Test
@@ -18,7 +19,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->sut = new Game();
+        $this->sut = new Game(new StandardRulesSet());
     }
 
     /**
