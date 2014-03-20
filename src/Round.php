@@ -60,6 +60,6 @@ final class Round implements RoundInterface
         $playerAnswer = $player->play($gameRules, $step);
         $validAnswer = $gameRules->generateValidAnswer($step->getRawValue());
 
-        return new StepResult($player, $playerAnswer, $validAnswer, $step, $playerAnswer->isSameAs($validAnswer));
+        return new StepResult($player, $playerAnswer, $validAnswer, $step);
     }
 }
