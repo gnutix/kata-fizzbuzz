@@ -31,12 +31,8 @@ class GameTest extends \PHPUnit_Framework_TestCase
             array(
                 new Rounds(
                     array(
-                        new Round(
-                            new \LimitIterator($this->getPerfectPlayers()->getInfiniteIterator(), 2, 16)
-                        ),
-                        new Round(
-                            new \LimitIterator($this->getMixedPlayers()->getInfiniteIterator(), 0, PHP_INT_MAX)
-                        ),
+                        new Round(new \LimitIterator($this->getPerfectPlayers()->getInfiniteIterator(), 2, 16)),
+                        new Round(new \LimitIterator($this->getMixedPlayers()->getInfiniteIterator(), 0, PHP_INT_MAX)),
                     )
                 ),
                 array(
@@ -58,11 +54,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
                         17,
                         FizzNumberRule::VALID_ANSWER,
                     ),
-                    array(
-                        1,
-                        2,
-                        'Hallo ?!',
-                    ),
+                    array(1, 2, 'Hallo ?!'),
                 )
             ),
         );
