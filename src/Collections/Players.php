@@ -3,17 +3,16 @@
 namespace FizzBuzz\Collections;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use FizzBuzz\PlayerInterface;
 
 /**
  * Players Collection
  *
- * @method PlayerInterface[] toArray()
+ * @method \FizzBuzz\PlayerInterface[] toArray()
  */
 final class Players extends ArrayCollection
 {
     /**
-     * @return PlayerInterface[]|\InfiniteIterator
+     * @return \FizzBuzz\PlayerInterface[]|\InfiniteIterator
      */
     public function getInfiniteIterator()
     {
