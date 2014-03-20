@@ -2,45 +2,11 @@
 
 namespace FizzBuzz\Entity;
 
-use FizzBuzz\ValueObjectInterface;
+use FizzBuzz\AbstractValueObject;
 
 /**
  * Answer
  */
-final class Answer implements ValueObjectInterface
+final class Answer extends AbstractValueObject
 {
-    /** @var mixed */
-    protected $answer;
-
-    /**
-     * {@inheritDoc}
-     */
-    public function __construct($answer)
-    {
-        $this->answer = $answer;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function isSameAs(ValueObjectInterface $valueObject)
-    {
-        return $this->getRawValue() === $valueObject->getRawValue();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getRawValue()
-    {
-        return $this->answer;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function __toString()
-    {
-        return (string) $this->answer;
-    }
 }
