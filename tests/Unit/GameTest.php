@@ -27,7 +27,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
      */
     public function testGameStartsEveryRounds()
     {
-        $round = $this->getMock('\FizzBuzz\RoundInterface');
+        $round = $this->getMockBuilder('\FizzBuzz\RoundInterface')->disableOriginalConstructor()->getMock();
         $rounds = new Rounds();
 
         for ($i = 1, $nbRounds = 3; $i <= $nbRounds; $i++) {
