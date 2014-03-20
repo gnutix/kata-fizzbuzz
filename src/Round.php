@@ -57,9 +57,11 @@ final class Round implements RoundInterface
      */
     protected function createStepResult(AbstractRulesSet $gameRules, PlayerInterface $player, Step $step)
     {
-        $playerAnswer = $player->play($gameRules, $step);
-        $validAnswer = $gameRules->generateValidAnswer($step->getRawValue());
-
-        return new StepResult($player, $playerAnswer, $validAnswer, $step);
+        return new StepResult(
+            $player,
+            $player->play($gameRules, $step),
+            $gameRules->generateValidAnswer($step->getRawValue()),
+            $step
+        );
     }
 }
