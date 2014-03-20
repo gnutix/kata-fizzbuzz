@@ -8,7 +8,7 @@ use FizzBuzz\Collections\Rounds;
 /**
  * Game
  */
-final class Game implements GameInterface
+final class Game
 {
     /** @var \FizzBuzz\AbstractRulesSet */
     protected $gameRules;
@@ -30,7 +30,7 @@ final class Game implements GameInterface
 
         return new GameResult(
             array_map(
-                function (RoundInterface $round) use ($gameRules) {
+                function (AbstractRound $round) use ($gameRules) {
                     return $round->play($gameRules);
                 },
                 $rounds->toArray()

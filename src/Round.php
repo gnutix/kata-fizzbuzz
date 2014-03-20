@@ -8,19 +8,8 @@ use FizzBuzz\Entity\Step;
 /**
  * Round
  */
-final class Round implements RoundInterface
+final class Round extends AbstractRound
 {
-    /** @var \LimitIterator */
-    protected $players;
-
-    /**
-     * @param \LimitIterator $players
-     */
-    public function __construct(\LimitIterator $players)
-    {
-        $this->players = $players;
-    }
-
     /**
      * {@inheritDoc}
      */
