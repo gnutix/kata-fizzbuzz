@@ -39,7 +39,8 @@ class GameTest extends \PHPUnit_Framework_TestCase
             false,
             true,
             array(
-                'play'
+                '__construct',
+                'play',
             )
         );
         $rounds = new Rounds();
