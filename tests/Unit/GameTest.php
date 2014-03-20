@@ -31,17 +31,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
      */
     public function testGameStartsEveryRounds()
     {
-        $round = $this->getMockForAbstractClass(
-            '\FizzBuzz\AbstractRound',
-            array(),
-            '',
-            false,
-            false,
-            true,
-            array(
-                'play',
-            )
-        );
+        $round = $this->getRoundMock();
         $rounds = new Rounds();
 
         for ($i = 1, $nbRounds = 3; $i <= $nbRounds; $i++) {
@@ -54,5 +44,23 @@ class GameTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('FizzBuzz\Collections\GameResult', $gameResult);
         $this->assertCount(3, $gameResult);
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getRoundMock()
+    {
+        return $this->getMockForAbstractClass(
+            '\FizzBuzz\AbstractRound',
+            array(),
+            '',
+            false,
+            false,
+            true,
+            array(
+                'play',
+            )
+        );
     }
 }
