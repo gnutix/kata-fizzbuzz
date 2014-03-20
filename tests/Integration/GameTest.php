@@ -22,8 +22,6 @@ use FizzBuzz\RulesSets\StandardRulesSet;
  */
 class GameTest extends \PHPUnit_Framework_TestCase
 {
-    const MAX_STEPS = 100;
-
     /**
      * @return array
      */
@@ -34,10 +32,10 @@ class GameTest extends \PHPUnit_Framework_TestCase
                 new Rounds(
                     array(
                         new Round(
-                            new \LimitIterator($this->getPerfectPlayers()->getInfiniteIterator(), 0, static::MAX_STEPS)
+                            new \LimitIterator($this->getPerfectPlayers()->getInfiniteIterator(), 2, 16)
                         ),
                         new Round(
-                            new \LimitIterator($this->getMixedPlayers()->getInfiniteIterator(), 0, static::MAX_STEPS)
+                            new \LimitIterator($this->getMixedPlayers()->getInfiniteIterator(), 0, PHP_INT_MAX)
                         ),
                     )
                 ),
@@ -82,12 +80,6 @@ class GameTest extends \PHPUnit_Framework_TestCase
     {
         $game = new Game(new StandardRulesSet());
         $gameResult = $game->play($rounds);
-
-        // Limit the results on the first round (as there's only perfect players)
-        $gameResult->set(
-            0,
-            new RoundResult(array_values($gameResult->get(0)->slice(2, count($expectedGameResult[0]))))
-        );
 
         foreach ($gameResult->toArray() as $roundId => $roundResult) {
             foreach ($roundResult->toArray() as $stepId => $stepResult) {
