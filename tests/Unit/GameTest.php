@@ -14,12 +14,16 @@ class GameTest extends \PHPUnit_Framework_TestCase
     /** @var \FizzBuzz\Game */
     protected $sut;
 
+    /** @var \FizzBuzz\AbstractRulesSet */
+    protected $rules;
+
     /**
      * {@inheritDoc}
      */
     public function setUp()
     {
-        $this->sut = new Game(new StandardRulesSet());
+        $this->rules = new StandardRulesSet();
+        $this->sut = new Game($this->rules);
     }
 
     /**
@@ -44,7 +48,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
             $rounds->add($round);
         }
 
-        $round->expects($this->exactly($nbRounds))->method('play');
+        $round->expects($this->exactly($nbRounds))->method('play')->with($this->rules);
 
         $gameResult = $this->sut->play($rounds);
 
