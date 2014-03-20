@@ -3,7 +3,6 @@
 namespace Tests\Integration;
 
 use FizzBuzz\Collections\Players;
-use FizzBuzz\Collections\RoundResult;
 use FizzBuzz\Collections\Rounds;
 use FizzBuzz\Entity\Answer;
 use FizzBuzz\Game;
