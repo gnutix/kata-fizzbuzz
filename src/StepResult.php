@@ -22,28 +22,22 @@ final class StepResult
     /** @var \FizzBuzz\Entity\Step */
     protected $step;
 
-    /** @var bool */
-    protected $isValid;
-
     /**
      * @param \FizzBuzz\PlayerInterface $player
      * @param \FizzBuzz\Entity\Answer   $playerAnswer
      * @param \FizzBuzz\Entity\Answer   $validAnswer
      * @param \FizzBuzz\Entity\Step     $step
-     * @param bool                      $isValid
      */
     public function __construct(
         PlayerInterface $player,
         Answer $playerAnswer,
         Answer $validAnswer,
-        Step $step,
-        $isValid
+        Step $step
     ) {
         $this->player = $player;
         $this->playerAnswer = $playerAnswer;
         $this->validAnswer = $validAnswer;
         $this->step = $step;
-        $this->isValid = $isValid;
     }
 
     /**
@@ -83,7 +77,7 @@ final class StepResult
      */
     public function isValid()
     {
-        return (bool) $this->isValid;
+        return (bool) $this->playerAnswer->isSameAs($this->validAnswer);
     }
 
     /**
@@ -91,7 +85,7 @@ final class StepResult
      */
     public function __toString()
     {
-        if ($this->isValid) {
+        if ($this->isValid()) {
             return vsprintf(
                 'Player "%s" correctly answered "%s" at round #%s.',
                 array(
