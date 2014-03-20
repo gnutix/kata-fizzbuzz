@@ -7,6 +7,9 @@
         <testsuite name="Integration tests">
             <directory suffix="Test.php">tests/Integration/</directory>
         </testsuite>
+        <testsuite name="Acceptance tests">
+            <directory suffix="Test.php">tests/Acceptance/</directory>
+        </testsuite>
     </testsuites>
 
     <!-- Code coverage configuration -->

@@ -58,33 +58,41 @@ class GameTest extends \PHPUnit_Framework_TestCase
     );
 
     /**
-     * {@inheritDoc}
+     * @return array
      */
-    public function setUp()
+    public function getRounds()
     {
         $standardRulesSet = new StandardRulesSet();
 
-        $this->game = new Game();
-        $this->rounds = new Rounds(
+        return array(
             array(
-                new Round(
-                    $standardRulesSet,
-                    new \LimitIterator($this->getPerfectPlayers()->getInfiniteIterator(), 0, static::MAX_STEPS)
-                ),
-                new Round(
-                    $standardRulesSet,
-                    new \LimitIterator($this->getMixedPlayers()->getInfiniteIterator(), 0, static::MAX_STEPS)
-                ),
-            )
+                new Rounds(
+                    array(
+                        new Round(
+                            $standardRulesSet,
+                            new \LimitIterator($this->getPerfectPlayers()->getInfiniteIterator(), 0, static::MAX_STEPS)
+                        ),
+                        new Round(
+                            $standardRulesSet,
+                            new \LimitIterator($this->getMixedPlayers()->getInfiniteIterator(), 0, static::MAX_STEPS)
+                        ),
+                    )
+                )
+            ),
         );
     }
 
     /**
      * Test playing the game
+     *
+     * @param \FizzBuzz\Collections\Rounds $rounds
+     *
+     * @dataProvider getRounds
      */
-    public function testPlayingTheGame()
+    public function testPlayingTheGame(Rounds $rounds)
     {
-        $gameResult = $this->game->play($this->rounds);
+        $game = new Game();
+        $gameResult = $game->play($rounds);
 
         // Limit the results on the first round (as there's only perfect players)
         $gameResult->set(0, new RoundResult(array_values($gameResult->get(0)->slice(2, count($this->gameResult[0])))));

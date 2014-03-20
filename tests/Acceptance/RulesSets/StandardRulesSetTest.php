@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\RulesSets;
+namespace Tests\Acceptance\RulesSets;
 
 use FizzBuzz\Entity\Answer;
 use FizzBuzz\Rules\BuzzNumberRule;
