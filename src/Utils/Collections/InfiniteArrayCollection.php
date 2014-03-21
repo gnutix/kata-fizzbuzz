@@ -1,6 +1,6 @@
 <?php
 
-namespace SharedDomain\Collections;
+namespace Utils\Collections;
 
 use Doctrine\Common\Collections\ArrayCollection;
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\SharedDomain\Collections;
+namespace Tests\Utils\Collections;
 
-use SharedDomain\Collections\InfiniteArrayCollection;
+use Utils\Collections\InfiniteArrayCollection;
 
 /**
  * InfiniteArrayCollection Test
  */
 class InfiniteArrayCollectionTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var \SharedDomain\Collections\InfiniteArrayCollection */
+    /** @var \Utils\Collections\InfiniteArrayCollection */
     protected $sut;
 
     /**

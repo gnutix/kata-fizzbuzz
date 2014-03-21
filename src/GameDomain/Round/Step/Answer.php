@@ -2,7 +2,7 @@
 
 namespace GameDomain\Round\Step;
 
-use SharedDomain\AbstractValueObject;
+use Utils\Domain\AbstractValueObject;
 
 /**
  * Answer

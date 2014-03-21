@@ -21,10 +21,18 @@ class BuzzNumberRuleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @todo Test this
+     * @test
      */
     public function testGenerateValidAnswer()
     {
-        $this->markTestIncomplete();
+        $this->assertEquals(BuzzNumberRule::VALID_ANSWER, $this->sut->generateValidAnswer(5)->getRawValue());
+    }
+
+    /**
+     * @expectedException \GameDomain\Exceptions\IrrelevantRuleException
+     */
+    public function testIrrelevantRule()
+    {
+        $this->sut->generateValidAnswer(1);
     }
 }

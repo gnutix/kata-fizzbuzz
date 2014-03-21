@@ -1,6 +1,6 @@
 <?php
 
-namespace SharedDomain;
+namespace Utils\Domain;
 
 /**
  * Value Object

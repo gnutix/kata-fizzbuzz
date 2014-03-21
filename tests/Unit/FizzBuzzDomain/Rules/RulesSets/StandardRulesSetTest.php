@@ -27,6 +27,7 @@ class StandardRulesSetTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \GameDomain\Rule\AbstractRulesSet::loadRules
+     * @covers \GameDomain\Rule\AbstractRulesSet::generateValidAnswer
      */
     public function testStandardRulesAreLoaded()
     {

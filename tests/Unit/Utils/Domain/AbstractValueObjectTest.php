@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\SharedDomain;
+namespace Tests\Unit\Utils\Domain;
 
 /**
  * AbstractValueObject Test
@@ -8,7 +8,7 @@ namespace Tests\Unit\SharedDomain;
 class AbstractValueObjectTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers \SharedDomain\AbstractValueObject::isSameAs()
+     * @covers \SharedDomain\AbstractValueObject::isSameAs
      * @todo Test this
      */
     public function testIsSameAs()

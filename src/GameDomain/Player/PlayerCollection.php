@@ -2,7 +2,7 @@
 
 namespace GameDomain\Player;
 
-use SharedDomain\Collections\InfiniteArrayCollection;
+use Utils\Collections\InfiniteArrayCollection;
 
 /**
  * Player Collection

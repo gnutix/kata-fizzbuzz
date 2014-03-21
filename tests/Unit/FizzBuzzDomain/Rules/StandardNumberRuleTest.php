@@ -21,10 +21,26 @@ class StandardNumberRuleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @todo Test this
+     * @dataProvider getNumbers
      */
-    public function testGenerateValidAnswer()
+    public function testGenerateValidAnswer($number)
     {
-        $this->markTestIncomplete();
+        $this->assertEquals($number, $this->sut->generateValidAnswer($number)->getRawValue());
+    }
+
+    /**
+     * @return array
+     */
+    public function getNumbers()
+    {
+        return array(
+            array(1),
+            array(3),
+            array(15),
+            array(0),
+            array(-10),
+            array(100),
+            array(PHP_INT_MAX),
+        );
     }
 }
