@@ -4,7 +4,6 @@ namespace Tests\Unit\FizzBuzzDomain\Players;
 
 use FizzBuzzDomain\Players\Nabila;
 use GameDomain\Round\Step\Step;
-use GameDomain\Rule\AbstractRulesSet;
 
 /**
  * Nabila Test
@@ -23,23 +22,34 @@ class NabilaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getGameRules
-     * @todo Test this
+     * @param int $stepNumber
+     *
+     * @dataProvider getSteps
      */
-    public function testChuckAlwaysAnswersCorrectly(AbstractRulesSet $gameRules)
+    public function testPlay($stepNumber)
     {
-        $this->markTestIncomplete();
-
-        $this->assertEquals('Hallo ?!', $this->sut->play($gameRules, new Step(1))->getRawValue());
+        $this->assertEquals('Hallo ?!', $this->sut->play($this->getGameRules(), new Step($stepNumber))->getRawValue());
     }
 
     /**
      * @return array
      */
-    public function getGameRules()
+    public function getSteps()
     {
         return array(
-            array($this->getMockForAbstractClass('\GameDomain\Rule\AbstractRulesSet')),
+            array(1),
+            array(3),
+            array(5),
+            array(15),
+            array(100),
         );
+    }
+
+    /**
+     * @return \GameDomain\Rule\AbstractRulesSet
+     */
+    public function getGameRules()
+    {
+        return $this->getMockForAbstractClass('\GameDomain\Rule\AbstractRulesSet');
     }
 }

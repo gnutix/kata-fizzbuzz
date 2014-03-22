@@ -32,7 +32,7 @@ class JohnDoeTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider getFakeRandomGeneratorNumbers
      */
-    public function testJohnDoeRandomAnswers(NumberGeneratorInterface $numberGenerator, $stepNumber, $expectedAnswer)
+    public function testPlay(NumberGeneratorInterface $numberGenerator, $stepNumber, $expectedAnswer)
     {
         $player = new JohnDoe($numberGenerator);
 
