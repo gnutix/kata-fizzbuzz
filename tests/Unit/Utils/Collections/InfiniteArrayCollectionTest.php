@@ -9,6 +9,9 @@ use Utils\Collections\InfiniteArrayCollection;
  */
 class InfiniteArrayCollectionTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var array */
+    protected $data = array(1, 2, 3);
+
     /** @var \Utils\Collections\InfiniteArrayCollection */
     protected $sut;
 
@@ -17,16 +20,25 @@ class InfiniteArrayCollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->sut = new InfiniteArrayCollection(array(1, 2, 3));
+        $this->sut = new InfiniteArrayCollection($this->data);
     }
 
     /**
-     * @todo Complete test.
+     * @test
      */
-    public function testInfiniteIterator()
+    public function testInfiniteIteratorResult()
     {
-        $this->assertInstanceOf('\InfiniteIterator', $this->sut->getInfiniteIterator());
+        $infiniteIterator = $this->sut->getInfiniteIterator();
+        $this->assertInstanceOf('\InfiniteIterator', $infiniteIterator);
 
-        $this->markTestIncomplete('Complete assertions about ->rewind() piece of code.');
+        $expectedValues = array_merge($this->data, $this->data, $this->data);
+
+        foreach ($infiniteIterator as $value) {
+            if (empty($expectedValues)) {
+                break;
+            }
+
+            $this->assertEquals(array_shift($expectedValues), $value);
+        }
     }
 }
