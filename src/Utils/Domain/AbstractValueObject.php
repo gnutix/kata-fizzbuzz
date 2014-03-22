@@ -26,22 +26,16 @@ abstract class AbstractValueObject
     public function isSameAs($value)
     {
         // If the given object is not an AbstractValueObject, we can't compare them
-        if (!($value instanceof AbstractValueObject) || get_class($value) !== get_class($this)) {
+        if (!$this->areObjectsOfSameType($this, $value)) {
             return false;
         }
 
         $rawValue = $this->getRawValue();
         $otherRawValue = $value->getRawValue();
 
-        if (is_object($rawValue) && is_object($otherRawValue)) {
-
-            // If the two objects are not instances of the same class, they are not the same
-            if (get_class($rawValue) !== get_class($otherRawValue)) {
-                return false;
-            }
-
-            // We use a loose-type comparison to compare objects, otherwise comparing two different instances of the
-            // same object with the same properties/values would return false.
+        // We use a loose-type comparison to compare objects, otherwise comparing two different instances of the
+        // same object with the same properties/values would return false.
+        if ($this->areObjectsOfSameType($rawValue, $otherRawValue)) {
             return $rawValue == $otherRawValue;
         }
 
@@ -68,5 +62,16 @@ abstract class AbstractValueObject
         }
 
         return (string) $rawValue;
+    }
+
+    /**
+     * @param mixed $value1
+     * @param mixed $value2
+     *
+     * @return bool
+     */
+    protected function areObjectsOfSameType($value1, $value2)
+    {
+        return (is_object($value1) && is_object($value2)) && (get_class($value1) === get_class($value2));
     }
 }
