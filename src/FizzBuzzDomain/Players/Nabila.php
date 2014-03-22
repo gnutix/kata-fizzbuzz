@@ -8,7 +8,7 @@ use GameDomain\Round\Step\Step;
 use GameDomain\Rule\AbstractRulesSet;
 
 /**
- * Stupid Player : this player never gives a valid answer.
+ * Stupid Player : this player never gives a correct answer.
  */
 final class Nabila implements PlayerInterface
 {

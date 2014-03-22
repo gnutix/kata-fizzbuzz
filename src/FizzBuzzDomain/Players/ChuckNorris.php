@@ -7,7 +7,7 @@ use GameDomain\Round\Step\Step;
 use GameDomain\Rule\AbstractRulesSet;
 
 /**
- * Perfect player that never fails.
+ * Perfect Player : always gives a correct answer.
  */
 final class ChuckNorris implements PlayerInterface
 {
