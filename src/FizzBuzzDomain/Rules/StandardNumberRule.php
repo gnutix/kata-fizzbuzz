@@ -2,6 +2,7 @@
 
 namespace FizzBuzzDomain\Rules;
 
+use GameDomain\Exceptions\IrrelevantRuleException;
 use GameDomain\Round\Step\Answer;
 use GameDomain\Rule\AbstractRule;
 
@@ -15,6 +16,10 @@ final class StandardNumberRule extends AbstractRule
      */
     public function generateValidAnswer($number)
     {
-        return new Answer($number);
+        if (is_numeric($number)) {
+            return new Answer($number);
+        }
+
+        throw new IrrelevantRuleException();
     }
 }

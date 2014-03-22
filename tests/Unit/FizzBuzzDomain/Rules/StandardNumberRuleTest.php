@@ -43,4 +43,12 @@ class StandardNumberRuleTest extends \PHPUnit_Framework_TestCase
             array(PHP_INT_MAX),
         );
     }
+
+    /**
+     * @expectedException \GameDomain\Exceptions\IrrelevantRuleException
+     */
+    public function testIrrelevantRule()
+    {
+        $this->sut->generateValidAnswer('test');
+    }
 }
