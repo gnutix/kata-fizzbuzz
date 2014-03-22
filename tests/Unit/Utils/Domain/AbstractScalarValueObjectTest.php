@@ -63,6 +63,7 @@ class AbstractScalarValueObjectTest extends \PHPUnit_Framework_TestCase
             array(array()),
             array(array(1234)),
             array(new ScalarValueObjectMock(1234)),
+            array(fopen(dirname(__FILE__), 'r')),
         );
     }
 

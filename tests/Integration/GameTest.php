@@ -22,45 +22,13 @@ use Utils\NumberGenerator\NumberGenerators\FakeNumberGenerator;
 class GameTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @return array
+     * @test
      */
-    public function getRounds()
-    {
-        return array(
-            array(
-                new RoundCollection(
-                    array(
-                        new Round(new \LimitIterator($this->getPerfectPlayers()->getInfiniteIterator(), 9, 5)),
-                        new Round(new \LimitIterator($this->getMixedPlayers()->getInfiniteIterator(), 0, PHP_INT_MAX)),
-                    )
-                ),
-                array(
-                    array(
-                        BuzzNumberRule::VALID_ANSWER,
-                        11,
-                        FizzNumberRule::VALID_ANSWER,
-                        13,
-                        14,
-                        FizzBuzzNumberRule::VALID_ANSWER,
-                    ),
-                    array(1, 2, 'Hallo ?!'),
-                )
-            ),
-        );
-    }
-
-    /**
-     * Test playing the game
-     *
-     * @param \GameDomain\Round\RoundCollection $rounds
-     * @param array                        $expectedGameResult
-     *
-     * @dataProvider getRounds
-     */
-    public function testPlayingTheGame(RoundCollection $rounds, $expectedGameResult)
+    public function testPlayingTheGame()
     {
         $game = new Game(new StandardRulesSet());
-        $gameResult = $game->play($rounds);
+        $gameResult = $game->play($this->getRounds());
+        $expectedGameResult = $this->getExpectedGameResults();
 
         foreach ($gameResult->toArray() as $roundId => $roundResult) {
             foreach ($roundResult->toArray() as $stepId => $stepResult) {
@@ -72,6 +40,37 @@ class GameTest extends \PHPUnit_Framework_TestCase
                 );
             }
         }
+    }
+
+    /**
+     * @return \GameDomain\Round\RoundCollection
+     */
+    protected function getRounds()
+    {
+        return new RoundCollection(
+            array(
+                new Round(new \LimitIterator($this->getPerfectPlayers()->getInfiniteIterator(), 9, 5)),
+                new Round(new \LimitIterator($this->getMixedPlayers()->getInfiniteIterator(), 0, PHP_INT_MAX)),
+            )
+        );
+    }
+
+    /**
+     * @return array
+     */
+    protected function getExpectedGameResults()
+    {
+        return array(
+            array(
+                BuzzNumberRule::VALID_ANSWER,
+                11,
+                FizzNumberRule::VALID_ANSWER,
+                13,
+                14,
+                FizzBuzzNumberRule::VALID_ANSWER,
+            ),
+            array(1, 2, 'Hallo ?!'),
+        );
     }
 
     /**

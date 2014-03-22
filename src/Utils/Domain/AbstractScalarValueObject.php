@@ -57,7 +57,7 @@ abstract class AbstractScalarValueObject implements ValueObjectInterface
      */
     protected function guardAgainstNonScalar($value)
     {
-        if (is_object($value) || is_array($value) || is_resource($value)) {
+        if (!is_scalar($value)) {
             throw new \InvalidArgumentException(
                 'Value objects does not accept non-scalar values such as '.gettype($value)
             );
