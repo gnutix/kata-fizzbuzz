@@ -2,13 +2,13 @@
 
 namespace GameDomain\Round\Step;
 
-use Utils\Domain\AbstractValueObject;
+use Utils\Domain\AbstractScalarValueObject;
 
 /**
  * Step
  *
  * @method int getRawValue()
  */
-final class Step extends AbstractValueObject
+final class Step extends AbstractScalarValueObject
 {
 }
