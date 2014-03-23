@@ -54,7 +54,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \GameDomain\Game\AbstractGame
+     * @test
      */
     public function testPlayingTheGame()
     {

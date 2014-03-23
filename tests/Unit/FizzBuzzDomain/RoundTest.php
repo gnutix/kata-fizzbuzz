@@ -34,11 +34,7 @@ class RoundTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\GameDomain\Round\Step\StepResultCollection', $roundResult);
         $this->assertInstanceOf('\GameDomain\Round\Step\StepResult', $roundResult->first());
 
-        /**
-         * There should be only two results, the first one correct from Chuck Norris, the second one failed from Nabila
-         *
-         * @covers \FizzBuzzDomain\Round::play
-         */
+        // There should be only two results, the first one correct from Chuck Norris, the second one failed from Nabila
         $this->assertCount(2, $roundResult);
 
         /**
