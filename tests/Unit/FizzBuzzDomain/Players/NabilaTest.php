@@ -7,7 +7,7 @@ use FizzBuzzDomain\Players\Nabila;
 /**
  * Nabila Test
  */
-class NabilaTest extends AbstractPlayerTest
+class NabilaTest extends AbstractFizzBuzzPlayerTest
 {
     /**
      * {@inheritDoc}

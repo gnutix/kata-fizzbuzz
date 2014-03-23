@@ -9,7 +9,7 @@ use GameDomain\Round\Step\Step;
 /**
  * Player Test
  */
-abstract class AbstractPlayerTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractFizzBuzzPlayerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test

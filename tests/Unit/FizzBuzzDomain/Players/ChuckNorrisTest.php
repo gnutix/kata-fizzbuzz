@@ -7,7 +7,7 @@ use FizzBuzzDomain\Players\ChuckNorris;
 /**
  * ChuckNorris Test
  */
-class ChuckNorrisTest extends AbstractPlayerTest
+class ChuckNorrisTest extends AbstractFizzBuzzPlayerTest
 {
     /**
      * {@inheritDoc}

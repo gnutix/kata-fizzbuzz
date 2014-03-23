@@ -9,6 +9,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @method \GameDomain\Round\Step\StepResult[] toArray()
  * @method \GameDomain\Round\Step\StepResult get($key)
+ * @method \GameDomain\Round\Step\StepResult first()
+ * @method \GameDomain\Round\Step\StepResult last()
  */
 final class StepResultCollection extends ArrayCollection
 {

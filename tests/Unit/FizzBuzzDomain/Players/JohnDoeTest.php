@@ -8,7 +8,7 @@ use Utils\NumberGenerator\NumberGenerators\FakeNumberGenerator;
 /**
  * JohnDoe Test
  */
-class JohnDoeTest extends AbstractPlayerTest
+class JohnDoeTest extends AbstractFizzBuzzPlayerTest
 {
     /**
      * {@inheritDoc}
