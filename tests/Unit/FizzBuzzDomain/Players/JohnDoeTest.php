@@ -3,52 +3,37 @@
 namespace Tests\Unit\FizzBuzzDomain\Players;
 
 use FizzBuzzDomain\Players\JohnDoe;
-use FizzBuzzDomain\Rules\FizzNumberRule;
-use FizzBuzzDomain\Rules\RulesSets\StandardRulesSet;
-use GameDomain\Round\Step\Step;
-use Utils\NumberGenerator\NumberGeneratorInterface;
 use Utils\NumberGenerator\NumberGenerators\FakeNumberGenerator;
 
 /**
  * JohnDoe Test
  */
-class JohnDoeTest extends \PHPUnit_Framework_TestCase
+class JohnDoeTest extends AbstractPlayerTest
 {
-    /** @var \FizzBuzzDomain\Rules\RulesSets\StandardRulesSet */
-    protected $gameRules;
+    /**
+     * {@inheritDoc}
+     *
+     * @dataProvider getSteps
+     */
+    public function testPlay($stepNumber)
+    {
+        $this->assertTrue($this->play($this->getPlayer(), $stepNumber));
+        $this->assertFalse($this->play($this->getLosingPlayer(), $stepNumber));
+    }
 
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    protected function getPlayer()
     {
-        $this->gameRules = new StandardRulesSet();
+        return new JohnDoe(new FakeNumberGenerator(1));
     }
 
     /**
-     * @param \Utils\NumberGenerator\NumberGeneratorInterface $numberGenerator
-     * @param int                                             $stepNumber
-     * @param mixed                                           $expectedAnswer
-     *
-     * @dataProvider getFakeRandomGeneratorNumbers
+     * @return \FizzBuzzDomain\Players\JohnDoe
      */
-    public function testPlay(NumberGeneratorInterface $numberGenerator, $stepNumber, $expectedAnswer)
+    protected function getLosingPlayer()
     {
-        $player = new JohnDoe($numberGenerator);
-
-        $this->assertEquals($expectedAnswer, $player->play($this->gameRules, new Step($stepNumber))->getRawValue());
-    }
-
-    /**
-     * @return array
-     */
-    public function getFakeRandomGeneratorNumbers()
-    {
-        return array(
-            array(new FakeNumberGenerator(0), 1, '?'),
-            array(new FakeNumberGenerator(1), 1, 1),
-            array(new FakeNumberGenerator(0), 3, '?'),
-            array(new FakeNumberGenerator(1), 3, FizzNumberRule::VALID_ANSWER),
-        );
+        return new JohnDoe(new FakeNumberGenerator(0));
     }
 }
