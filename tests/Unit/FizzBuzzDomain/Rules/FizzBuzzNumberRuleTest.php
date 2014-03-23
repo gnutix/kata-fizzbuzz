@@ -2,19 +2,19 @@
 
 namespace Tests\Unit\FizzBuzzDomain\Rules;
 
-use FizzBuzzDomain\Rules\BuzzNumberRule;
+use FizzBuzzDomain\Rules\FizzBuzzNumberRule;
 
 /**
- * BuzzNumberRule Test
+ * FizzBuzzNumberRule Test
  */
-class BuzzNumberRuleTest extends AbstractFizzBuzzRuleTest
+class FizzBuzzNumberRuleTest extends AbstractFizzBuzzRuleTest
 {
     /**
      * @return \GameDomain\Rule\AbstractRule
      */
     public function getRule()
     {
-        return new BuzzNumberRule();
+        return new FizzBuzzNumberRule();
     }
 
     /**
@@ -23,10 +23,10 @@ class BuzzNumberRuleTest extends AbstractFizzBuzzRuleTest
     public function getValidNumbers()
     {
         return array(
-            array(5),
-            array(10),
-            array(25),
-            array(100),
+            array(15),
+            array(30),
+            array(60),
+            array(90),
         );
     }
 
@@ -37,9 +37,9 @@ class BuzzNumberRuleTest extends AbstractFizzBuzzRuleTest
     {
         return array(
             array(1),
-            array(3),
-            array(7),
-            array(14),
+            array(5),
+            array(12),
+            array(100),
         );
     }
 }

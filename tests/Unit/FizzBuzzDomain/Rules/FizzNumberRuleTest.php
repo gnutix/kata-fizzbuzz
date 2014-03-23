@@ -7,32 +7,39 @@ use FizzBuzzDomain\Rules\FizzNumberRule;
 /**
  * FizzNumberRule Test
  */
-class FizzNumberRuleTest extends \PHPUnit_Framework_TestCase
+class FizzNumberRuleTest extends AbstractFizzBuzzRuleTest
 {
-    /** @var \FizzBuzzDomain\Rules\FizzNumberRule */
-    protected $sut;
-
     /**
-     * {@inheritDoc}
+     * @return \GameDomain\Rule\AbstractRule
      */
-    public function setUp()
+    public function getRule()
     {
-        $this->sut = new FizzNumberRule();
+        return new FizzNumberRule();
     }
 
     /**
-     * @test
+     * @return array
      */
-    public function testGenerateValidAnswer()
+    public function getValidNumbers()
     {
-        $this->assertEquals(FizzNumberRule::VALID_ANSWER, $this->sut->generateValidAnswer(3)->getRawValue());
+        return array(
+            array(3),
+            array(9),
+            array(12),
+            array(90),
+        );
     }
 
     /**
-     * @expectedException \GameDomain\Exceptions\IrrelevantRuleException
+     * @return array
      */
-    public function testIrrelevantRule()
+    public function getIrrelevantNumbers()
     {
-        $this->sut->generateValidAnswer(1);
+        return array(
+            array(1),
+            array(5),
+            array(17),
+            array(100),
+        );
     }
 }

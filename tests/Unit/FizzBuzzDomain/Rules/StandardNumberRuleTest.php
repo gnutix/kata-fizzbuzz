@@ -7,48 +7,41 @@ use FizzBuzzDomain\Rules\StandardNumberRule;
 /**
  * StandardNumberRule Test
  */
-class StandardNumberRuleTest extends \PHPUnit_Framework_TestCase
+class StandardNumberRuleTest extends AbstractFizzBuzzRuleTest
 {
-    /** @var \FizzBuzzDomain\Rules\StandardNumberRule */
-    protected $sut;
-
     /**
-     * {@inheritDoc}
+     * @return \GameDomain\Rule\AbstractRule
      */
-    public function setUp()
+    public function getRule()
     {
-        $this->sut = new StandardNumberRule();
-    }
-
-    /**
-     * @dataProvider getNumbers
-     */
-    public function testGenerateValidAnswer($number)
-    {
-        $this->assertEquals($number, $this->sut->generateValidAnswer($number)->getRawValue());
+        return new StandardNumberRule();
     }
 
     /**
      * @return array
      */
-    public function getNumbers()
+    public function getValidNumbers()
     {
         return array(
+            array(-1),
             array(1),
             array(3),
-            array(15),
-            array(0),
-            array(-10),
-            array(100),
+            array('0'),
             array(PHP_INT_MAX),
         );
     }
 
     /**
-     * @expectedException \GameDomain\Exceptions\IrrelevantRuleException
+     * @return array
      */
-    public function testIrrelevantRule()
+    public function getIrrelevantNumbers()
     {
-        $this->sut->generateValidAnswer('test');
+        return array(
+            array(''),
+            array('test'),
+            array(new \stdClass()),
+            array(array(1234)),
+            array('100,200'),
+        );
     }
 }
