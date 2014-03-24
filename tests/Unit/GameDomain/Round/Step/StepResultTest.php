@@ -48,14 +48,14 @@ class StepResultTest extends \PHPUnit_Framework_TestCase
                 new Answer(1),
                 new Answer(1),
                 new Step(1),
-                'Player "Perfect" correctly answered "1" at round #1.',
+                'Player "Perfect" correctly answered "1" at step #1.',
             ),
             array(
                 new StupidPlayer(),
                 new Answer('fail'),
                 new Answer(2),
                 new Step(2),
-                'Player "Stupid" failed by answering "fail" at round #2. Correct answer was "2".',
+                'Player "Stupid" failed by answering "fail" at step #2. Correct answer was "2".',
             ),
         );
     }

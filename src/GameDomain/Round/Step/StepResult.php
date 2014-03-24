@@ -84,25 +84,10 @@ final class StepResult
      */
     public function __toString()
     {
-        if ($this->isValid()) {
-            return vsprintf(
-                'Player "%s" correctly answered "%s" at round #%s.',
-                array(
-                    (string) $this->player,
-                    (string) $this->playerAnswer,
-                    (string) $this->step,
-                )
-            );
-        }
+        $message = $this->isValid()
+            ? 'Player "%s" correctly answered "%s" at step #%s.'
+            : 'Player "%s" failed by answering "%s" at step #%s. Correct answer was "%s".';
 
-        return vsprintf(
-            'Player "%s" failed by answering "%s" at round #%s. Correct answer was "%s".',
-            array(
-                (string) $this->player,
-                (string) $this->playerAnswer,
-                (string) $this->step,
-                (string) $this->validAnswer,
-            )
-        );
+        return vsprintf($message, array($this->player, $this->playerAnswer, $this->step, $this->validAnswer));
     }
 }
