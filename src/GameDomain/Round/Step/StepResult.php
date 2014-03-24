@@ -76,7 +76,7 @@ final class StepResult
      */
     public function isValid()
     {
-        return (bool) $this->playerAnswer->isSameAs($this->validAnswer);
+        return $this->playerAnswer->isSameAs($this->validAnswer);
     }
 
     /**
