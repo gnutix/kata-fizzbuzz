@@ -2,19 +2,19 @@
 
 namespace Tests\Integration;
 
-use FizzBuzz\Collections\Players;
-use FizzBuzz\Collections\Rounds;
-use FizzBuzz\Entity\Answer;
-use FizzBuzz\Game;
-use FizzBuzz\NumberGenerators\FakeNumberGenerator;
-use FizzBuzz\Players\ChuckNorris;
-use FizzBuzz\Players\JohnDoe;
-use FizzBuzz\Players\Nabila;
-use FizzBuzz\Round;
-use FizzBuzz\Rules\BuzzNumberRule;
-use FizzBuzz\Rules\FizzBuzzNumberRule;
-use FizzBuzz\Rules\FizzNumberRule;
-use FizzBuzz\RulesSets\StandardRulesSet;
+use FizzBuzzDomain\Game;
+use FizzBuzzDomain\Players\ChuckNorris;
+use FizzBuzzDomain\Players\JohnDoe;
+use FizzBuzzDomain\Players\Nabila;
+use FizzBuzzDomain\Round;
+use FizzBuzzDomain\Rules\BuzzNumberRule;
+use FizzBuzzDomain\Rules\FizzBuzzNumberRule;
+use FizzBuzzDomain\Rules\FizzNumberRule;
+use FizzBuzzDomain\Rules\RulesSets\StandardRulesSet;
+use GameDomain\Player\PlayerCollection;
+use GameDomain\Round\RoundCollection;
+use GameDomain\Round\Step\Answer;
+use Utils\NumberGenerator\NumberGenerators\FakeNumberGenerator;
 
 /**
  * Game Test
@@ -22,45 +22,13 @@ use FizzBuzz\RulesSets\StandardRulesSet;
 class GameTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @return array
+     * @test
      */
-    public function getRounds()
-    {
-        return array(
-            array(
-                new Rounds(
-                    array(
-                        new Round(new \LimitIterator($this->getPerfectPlayers()->getInfiniteIterator(), 9, 5)),
-                        new Round(new \LimitIterator($this->getMixedPlayers()->getInfiniteIterator(), 0, PHP_INT_MAX)),
-                    )
-                ),
-                array(
-                    array(
-                        BuzzNumberRule::VALID_ANSWER,
-                        11,
-                        FizzNumberRule::VALID_ANSWER,
-                        13,
-                        14,
-                        FizzBuzzNumberRule::VALID_ANSWER,
-                    ),
-                    array(1, 2, 'Hallo ?!'),
-                )
-            ),
-        );
-    }
-
-    /**
-     * Test playing the game
-     *
-     * @param \FizzBuzz\Collections\Rounds $rounds
-     * @param array                        $expectedGameResult
-     *
-     * @dataProvider getRounds
-     */
-    public function testPlayingTheGame(Rounds $rounds, $expectedGameResult)
+    public function testPlayingTheGame()
     {
         $game = new Game(new StandardRulesSet());
-        $gameResult = $game->play($rounds);
+        $gameResult = $game->play($this->getRounds());
+        $expectedGameResult = $this->getExpectedGameResults();
 
         foreach ($gameResult->toArray() as $roundId => $roundResult) {
             foreach ($roundResult->toArray() as $stepId => $stepResult) {
@@ -75,11 +43,42 @@ class GameTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \FizzBuzz\Collections\Players
+     * @return \GameDomain\Round\RoundCollection
+     */
+    protected function getRounds()
+    {
+        return new RoundCollection(
+            array(
+                new Round(new \LimitIterator($this->getPerfectPlayers()->getInfiniteIterator(), 9, 5)),
+                new Round(new \LimitIterator($this->getMixedPlayers()->getInfiniteIterator(), 0, PHP_INT_MAX)),
+            )
+        );
+    }
+
+    /**
+     * @return array
+     */
+    protected function getExpectedGameResults()
+    {
+        return array(
+            array(
+                BuzzNumberRule::VALID_ANSWER,
+                11,
+                FizzNumberRule::VALID_ANSWER,
+                13,
+                14,
+                FizzBuzzNumberRule::VALID_ANSWER,
+            ),
+            array(1, 2, 'Hallo ?!'),
+        );
+    }
+
+    /**
+     * @return \GameDomain\Player\PlayerCollection
      */
     protected function getPerfectPlayers()
     {
-        $players = new Players();
+        $players = new PlayerCollection();
         for ($i = 1; $i <= 3; $i++) {
             $players->add(new ChuckNorris());
         }
@@ -88,11 +87,11 @@ class GameTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \FizzBuzz\Collections\Players
+     * @return \GameDomain\Player\PlayerCollection
      */
     protected function getMixedPlayers()
     {
-        $players = new Players();
+        $players = new PlayerCollection();
         $players->add(new ChuckNorris());
         $players->add(new JohnDoe(new FakeNumberGenerator(1)));
         $players->add(new Nabila());
