@@ -16,7 +16,7 @@ abstract class AbstractGame
     /**
      * {@inheritDoc}
      */
-    public function __construct(AbstractRulesSet $gameRules)
+    final public function __construct(AbstractRulesSet $gameRules)
     {
         $this->gameRules = $gameRules;
     }

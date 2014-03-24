@@ -14,7 +14,7 @@ class PerfectPlayer implements PlayerInterface
     /**
      * {@inheritDoc}
      */
-    public function play(AbstractRulesSet $gameRules, Step $step)
+    final public function play(AbstractRulesSet $gameRules, Step $step)
     {
         return $gameRules->generateValidAnswer($step->getRawValue());
     }

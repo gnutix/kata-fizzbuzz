@@ -16,7 +16,7 @@ abstract class AbstractRule
      *
      * @return bool
      */
-    public function isSatisfiedBy(Answer $playerAnswer, $number)
+    final public function isSatisfiedBy(Answer $playerAnswer, $number)
     {
         try {
             return $playerAnswer->isSameAs($this->generateValidAnswer($number));

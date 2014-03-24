@@ -15,15 +15,10 @@ abstract class AbstractRulesSet extends ArrayCollection
     /**
      * Constructor
      */
-    public function __construct()
+    final public function __construct()
     {
         $this->loadRules();
     }
-
-    /**
-     * Loads the rules
-     */
-    abstract protected function loadRules();
 
     /**
      * @param int $number
@@ -31,7 +26,7 @@ abstract class AbstractRulesSet extends ArrayCollection
      * @return \GameDomain\Round\Step\Answer
      * @throws \DomainException
      */
-    public function generateValidAnswer($number)
+    final public function generateValidAnswer($number)
     {
         foreach ($this->toArray() as $gameRule) {
             try {
@@ -43,4 +38,9 @@ abstract class AbstractRulesSet extends ArrayCollection
 
         throw new \DomainException('No valid answer can be generated from the current rules set.');
     }
+
+    /**
+     * Loads the rules
+     */
+    abstract protected function loadRules();
 }

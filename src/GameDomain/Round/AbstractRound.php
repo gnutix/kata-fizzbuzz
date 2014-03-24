@@ -15,7 +15,7 @@ abstract class AbstractRound
     /**
      * @param \LimitIterator $players
      */
-    public function __construct(\LimitIterator $players)
+    final public function __construct(\LimitIterator $players)
     {
         $this->players = $players;
     }

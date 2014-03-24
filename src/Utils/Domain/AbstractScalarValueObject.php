@@ -23,7 +23,7 @@ abstract class AbstractScalarValueObject implements ValueObjectInterface
     /**
      * {@inheritDoc}
      */
-    public function isSameAs($value)
+    final public function isSameAs($value)
     {
         // If the given object is not an AbstractScalarValueObject, we can't compare them
         if (!$this->areObjectsOfSameType($this, $value)) {
@@ -36,7 +36,7 @@ abstract class AbstractScalarValueObject implements ValueObjectInterface
     /**
      * {@inheritDoc}
      */
-    public function getRawValue()
+    final public function getRawValue()
     {
         return $this->value;
     }
@@ -44,7 +44,7 @@ abstract class AbstractScalarValueObject implements ValueObjectInterface
     /**
      * {@inheritDoc}
      */
-    public function __toString()
+    final public function __toString()
     {
         return (string) $this->getRawValue();
     }
@@ -55,7 +55,7 @@ abstract class AbstractScalarValueObject implements ValueObjectInterface
      * @return bool
      * @throws \InvalidArgumentException
      */
-    protected function guardAgainstNonScalar($value)
+    final protected function guardAgainstNonScalar($value)
     {
         if (!is_scalar($value)) {
             throw new \InvalidArgumentException(
@@ -70,7 +70,7 @@ abstract class AbstractScalarValueObject implements ValueObjectInterface
      *
      * @return bool
      */
-    protected function areObjectsOfSameType($value1, $value2)
+    final protected function areObjectsOfSameType($value1, $value2)
     {
         return is_object($value1) && is_object($value2) && (get_class($value1) === get_class($value2));
     }

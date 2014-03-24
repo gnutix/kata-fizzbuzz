@@ -12,7 +12,7 @@ class InfiniteArrayCollection extends ArrayCollection
     /**
      * @return \GameDomain\Player\PlayerInterface[]|\InfiniteIterator
      */
-    public function getInfiniteIterator()
+    final public function getInfiniteIterator()
     {
         $this->first();
 
