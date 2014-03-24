@@ -52,7 +52,6 @@ abstract class AbstractScalarValueObject implements ValueObjectInterface
     /**
      * @param mixed $value
      *
-     * @return bool
      * @throws \InvalidArgumentException
      */
     final protected function guardAgainstNonScalar($value)
