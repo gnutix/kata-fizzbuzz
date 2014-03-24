@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\GameDomain\Round\Step;
 
-use FizzBuzzDomain\Players\ChuckNorris;
-use FizzBuzzDomain\Players\Nabila;
 use GameDomain\Player\PlayerInterface;
+use GameDomain\Player\Players\PerfectPlayer;
+use GameDomain\Player\Players\StupidPlayer;
 use GameDomain\Round\Step\Answer;
 use GameDomain\Round\Step\Step;
 use GameDomain\Round\Step\StepResult;
@@ -44,18 +44,18 @@ class StepResultTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(
-                new ChuckNorris(),
+                new PerfectPlayer(),
                 new Answer(1),
                 new Answer(1),
                 new Step(1),
-                'Player "Chuck Norris" correctly answered "1" at round #1.',
+                'Player "Perfect" correctly answered "1" at round #1.',
             ),
             array(
-                new Nabila(),
-                new Answer(1),
+                new StupidPlayer(),
+                new Answer('fail'),
                 new Answer(2),
                 new Step(2),
-                'Player "Nabila" failed by answering "1" at round #2. Correct answer was "2".',
+                'Player "Stupid" failed by answering "fail" at round #2. Correct answer was "2".',
             ),
         );
     }

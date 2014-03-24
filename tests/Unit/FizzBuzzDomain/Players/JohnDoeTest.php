@@ -3,12 +3,13 @@
 namespace Tests\Unit\FizzBuzzDomain\Players;
 
 use FizzBuzzDomain\Players\JohnDoe;
+use Tests\Unit\GameDomain\Player\Players\AbstractPlayerTest;
 use Utils\NumberGenerator\NumberGenerators\FakeNumberGenerator;
 
 /**
  * JohnDoe Test
  */
-class JohnDoeTest extends AbstractFizzBuzzPlayerTest
+class JohnDoeTest extends AbstractPlayerTest
 {
     /**
      * {@inheritDoc}

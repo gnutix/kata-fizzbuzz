@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Unit\FizzBuzzDomain\Players;
+namespace Tests\Unit\GameDomain\Player\Players;
 
-use FizzBuzzDomain\Rules\RulesSets\StandardRulesSet;
+use Tests\Unit\GameDomain\Rule\Mocks\TestRulesSet;
 use GameDomain\Player\PlayerInterface;
 use GameDomain\Round\Step\Step;
 
 /**
  * Player Test
  */
-abstract class AbstractFizzBuzzPlayerTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractPlayerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -58,7 +58,7 @@ abstract class AbstractFizzBuzzPlayerTest extends \PHPUnit_Framework_TestCase
      */
     protected function getGameRules()
     {
-        return new StandardRulesSet();
+        return new TestRulesSet();
     }
 
     /**

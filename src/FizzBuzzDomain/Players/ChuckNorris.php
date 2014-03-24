@@ -2,23 +2,13 @@
 
 namespace FizzBuzzDomain\Players;
 
-use GameDomain\Player\PlayerInterface;
-use GameDomain\Round\Step\Step;
-use GameDomain\Rule\AbstractRulesSet;
+use GameDomain\Player\Players\PerfectPlayer;
 
 /**
- * Perfect Player : always gives a correct answer.
+ * Chuck Norris
  */
-final class ChuckNorris implements PlayerInterface
+final class ChuckNorris extends PerfectPlayer
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function play(AbstractRulesSet $gameRules, Step $step)
-    {
-        return $gameRules->generateValidAnswer($step->getRawValue());
-    }
-
     /**
      * {@inheritDoc}
      */

@@ -1,23 +1,22 @@
 <?php
 
-namespace FizzBuzzDomain\Players;
+namespace GameDomain\Player\Players;
 
 use GameDomain\Player\PlayerInterface;
-use GameDomain\Round\Step\Answer;
 use GameDomain\Round\Step\Step;
 use GameDomain\Rule\AbstractRulesSet;
 
 /**
- * Nabila
+ * Perfect Player : always gives a correct answer.
  */
-final class Nabila implements PlayerInterface
+class PerfectPlayer implements PlayerInterface
 {
     /**
      * {@inheritDoc}
      */
     public function play(AbstractRulesSet $gameRules, Step $step)
     {
-        return new Answer('Hallo ?!');
+        return $gameRules->generateValidAnswer($step->getRawValue());
     }
 
     /**
@@ -25,6 +24,6 @@ final class Nabila implements PlayerInterface
      */
     public function __toString()
     {
-        return 'Nabila';
+        return 'Perfect';
     }
 }

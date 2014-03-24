@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Unit\FizzBuzzDomain\Players;
+namespace Tests\Unit\GameDomain\Player\Players;
 
-use FizzBuzzDomain\Players\Nabila;
+use GameDomain\Player\Players\StupidPlayer;
 
 /**
- * Nabila Test
+ * StupidPlayer Test
  */
-class NabilaTest extends AbstractFizzBuzzPlayerTest
+class StupidPlayerTest extends AbstractPlayerTest
 {
     /**
      * {@inheritDoc}
@@ -24,6 +24,6 @@ class NabilaTest extends AbstractFizzBuzzPlayerTest
      */
     protected function getPlayer()
     {
-        return new Nabila();
+        return new StupidPlayer();
     }
 }

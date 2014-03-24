@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Unit\FizzBuzzDomain\Players;
+namespace Tests\Unit\GameDomain\Player\Players;
 
-use FizzBuzzDomain\Players\ChuckNorris;
+use GameDomain\Player\Players\PerfectPlayer;
 
 /**
- * ChuckNorris Test
+ * PerfectPlayer Test
  */
-class ChuckNorrisTest extends AbstractFizzBuzzPlayerTest
+class PerfectPlayerTest extends AbstractPlayerTest
 {
     /**
      * {@inheritDoc}
@@ -24,6 +24,6 @@ class ChuckNorrisTest extends AbstractFizzBuzzPlayerTest
      */
     protected function getPlayer()
     {
-        return new ChuckNorris();
+        return new PerfectPlayer();
     }
 }
