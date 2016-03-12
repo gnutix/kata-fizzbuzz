@@ -7,10 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Collection of Step Result
  *
- * @method \GameDomain\Round\Step\StepResult[] toArray()
- * @method \GameDomain\Round\Step\StepResult get($key)
- * @method \GameDomain\Round\Step\StepResult first()
- * @method \GameDomain\Round\Step\StepResult last()
+ * @method StepResult[] toArray()
+ * @method StepResult get($key)
+ * @method StepResult first()
+ * @method StepResult last()
  */
 final class StepResultCollection extends ArrayCollection
 {

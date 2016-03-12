@@ -7,7 +7,7 @@ use Utils\Collections\InfiniteArrayCollection;
 /**
  * Player Collection
  *
- * @method \GameDomain\Player\PlayerInterface[] toArray()
+ * @method PlayerInterface[] toArray()
  */
 final class PlayerCollection extends InfiniteArrayCollection
 {

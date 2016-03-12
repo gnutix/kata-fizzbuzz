@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Round Collection
  *
- * @method \GameDomain\Round\AbstractRound[] toArray()
+ * @method AbstractRound[] toArray()
  */
 final class RoundCollection extends ArrayCollection
 {

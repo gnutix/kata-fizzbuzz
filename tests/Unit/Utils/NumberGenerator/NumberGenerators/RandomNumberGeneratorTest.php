@@ -22,6 +22,9 @@ class RandomNumberGeneratorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider getRanges
+     *
+     * @param int $min
+     * @param int $max
      */
     public function testRandomGeneration($min, $max)
     {

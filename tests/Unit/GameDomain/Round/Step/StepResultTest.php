@@ -16,6 +16,12 @@ class StepResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider getStepResults
+     *
+     * @param \GameDomain\Player\PlayerInterface $player
+     * @param \GameDomain\Round\Step\Answer      $playerAnswer
+     * @param \GameDomain\Round\Step\Answer      $validAnswer
+     * @param \GameDomain\Round\Step\Step        $step
+     * @param string                             $expectedStringRepresentation
      */
     public function testIsValid(
         PlayerInterface $player,

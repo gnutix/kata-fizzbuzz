@@ -7,8 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Collection of Round Result
  *
- * @method \GameDomain\Round\Step\StepResultCollection[] toArray()
- * @method \GameDomain\Round\Step\StepResultCollection get($key)
+ * @method Step\StepResultCollection[] toArray()
+ * @method Step\StepResultCollection get($key)
  */
 final class RoundResultCollection extends ArrayCollection
 {

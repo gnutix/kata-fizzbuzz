@@ -23,6 +23,10 @@ class AbstractRuleTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider getSatisfiedByData
+     *
+     * @param \GameDomain\Round\Step\Answer $answer
+     * @param int                           $number
+     * @param bool                          $expectedResult
      */
     public function testIsSatisfiedBy(Answer $answer, $number, $expectedResult)
     {

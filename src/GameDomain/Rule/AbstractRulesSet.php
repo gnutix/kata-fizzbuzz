@@ -8,7 +8,7 @@ use GameDomain\Exceptions\IrrelevantRuleException;
 /**
  * Rules Set
  *
- * @method \GameDomain\Rule\AbstractRule[] toArray()
+ * @method AbstractRule[] toArray()
  */
 abstract class AbstractRulesSet extends ArrayCollection
 {
