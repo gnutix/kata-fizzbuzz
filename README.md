@@ -9,3 +9,8 @@ Fizz Buzz
 [![HHVM Status](http://hhvm.h4cc.de/badge/gnutix/kata-fizzbuzz.png)](http://hhvm.h4cc.de/package/gnutix/kata-fizzbuzz)
 
 This is the repository hosting my Coding Kata training of the Fizz Buzz game.
+
+Usage
+=====
+
+Run `bin/phpunit`.
