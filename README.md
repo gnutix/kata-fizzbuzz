@@ -10,7 +10,7 @@ Fizz Buzz
 
 This is the repository hosting my Coding Kata training of the Fizz Buzz game.
 
-Usage
-=====
+Project setup
+=============
 
-Run `bin/phpunit`.
+Run `vagrant up`, then `vagrant ssh -c 'cd /vagrant && bin/phpunit --testdox'` to see the tests results.
