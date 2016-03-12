@@ -5,7 +5,7 @@ namespace Utils\Collections;
 use Doctrine\Common\Collections\ArrayCollection as DoctrineArrayCollection;
 
 /**
- * Collection
+ * ArrayCollection
  */
 class ArrayCollection extends DoctrineArrayCollection
 {
