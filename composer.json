@@ -16,7 +16,9 @@
     "autoload": {
         "psr-4": {
             "Tests\\": "tests/",
-            "": "src/"
+            "FizzBuzzDomain\\": "src/FizzBuzzDomain/",
+            "GameDomain\\": "src/GameDomain/",
+            "Utils\\": "src/Utils/"
         }
     }
 }
