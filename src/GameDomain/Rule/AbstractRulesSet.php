@@ -2,8 +2,8 @@
 
 namespace GameDomain\Rule;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use GameDomain\Exceptions\IrrelevantRuleException;
+use Utils\Collections\ArrayCollection;
 
 /**
  * Rules Set

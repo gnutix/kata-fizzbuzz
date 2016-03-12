@@ -2,8 +2,6 @@
 
 namespace Utils\Collections;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 /**
  * Infinite ArrayCollection
  */

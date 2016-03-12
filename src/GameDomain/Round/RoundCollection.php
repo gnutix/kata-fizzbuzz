@@ -2,7 +2,7 @@
 
 namespace GameDomain\Round;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Utils\Collections\ArrayCollection;
 
 /**
  * Round Collection

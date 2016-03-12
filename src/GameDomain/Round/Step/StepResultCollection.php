@@ -2,7 +2,7 @@
 
 namespace GameDomain\Round\Step;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Utils\Collections\ArrayCollection;
 
 /**
  * Collection of Step Result
